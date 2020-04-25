@@ -1,6 +1,6 @@
 ## One Page Tweets
 
-http://onepagetweets.com
+https://onepagetweets.com
 
 Promote yourself and use the power of tweets to build your profile.
 
