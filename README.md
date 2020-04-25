@@ -182,7 +182,7 @@ If you've got an improvement, just send in a pull request. If you've got feature
 
 ## Author
 
-Richard Dimalanta [http://chardmd.com](http://chardmd.com)
+Richard Dimalanta [https://chardmd.com](http://chardmd.com)
 
 
 ## License
