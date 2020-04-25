@@ -9,7 +9,7 @@ steps:
   clone:
     type: "git-clone"
     description: "Cloning main repository..."
-    repo: "chardmd/tweets"
+    repo: "chardmd/onepagetweets"
     revision: "${{CF_BRANCH}}"
     when:
       branch:

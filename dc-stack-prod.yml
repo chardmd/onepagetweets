@@ -44,6 +44,7 @@ services:
       - "443:443"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/ssl/dhparam:/etc/ssl/dhparam
     depends_on:
       - web
 
