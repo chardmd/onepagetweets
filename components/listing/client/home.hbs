@@ -1,0 +1,61 @@
+{{#section 'head'}}
+    <!-- Search Engine -->
+    <meta name="description" content="Your marketplace for buying & selling micro projects">
+    <meta name="image" content="{{baseUrl}}/images/profile.png">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="One Page Tweets">
+    <meta itemprop="description" content="Promote yourself and use the power of tweets to build your profile">
+    <!-- open graph -->
+    <meta property="og:title" content="One Page Tweets - Your personal homepage">
+    <meta property="og:type" content="product">
+    <meta property="og:description" content="Create your free, one-page website in just few clicks">
+    <meta property="og:url" content="{{baseUrl}}">
+    <meta property="og:image" content="{{baseUrl}}/images/profile.png">
+    <meta property="og:image:alt" content="opt">
+    <!-- twitter -->
+    <meta name="twitter:title"
+        content="One Page Tweets - Promote yourself and use the power of tweets to build your profile">
+    <meta name="twitter:description" content="Create your free, one-page website in just few clicks">
+    <meta name="twitter:image" content="{{baseUrl}}/images/profile.png">
+    <meta name="twitter:site" content="@onepagetweets">
+    <meta name="twitter:creator" content="@onepagetweets">
+{{/section}}
+<div class="page home-page">
+    <!-- display flash messages -->
+    {{> flash}}
+    <!-- display flash messages -->
+    <br />
+    {{#if projExist}}
+        <div>
+            <div class="d-flex flex-column text-center">
+                <div class="mb-3">
+                    <img src='/images/hiker.png' alt="Generic placeholder image" />
+                </div>
+                <h1 class="h3 mb-1 text-gray-800 mb-3">You have an existing website</h1>
+                <p class="text-primary">
+                    <span>Current Status</span>
+                    {{#if isPublished}}
+                        <span class="badge badge-success">Published</span>
+                    {{else}}
+                        <span class="badge badge-secondary">Draft</span>
+                    {{/if}}
+                </p>
+                <p>Click the button below to update</p>
+                <h1 class="display-5 text-dark"><a href="/post/about" class="btn btn-lg btn-primary shadow-sm">
+                        <i class="far fa-edit fa-sm text-white-50"></i> Update website</a></h1>
+            </div>
+        </div>
+    {{else}}
+        <div>
+            <div class="d-flex flex-column text-center">
+                <div>
+                    <img src='/images/drawing.png' alt="Generic placeholder image" />
+                </div>
+                <h1 class="h3 mb-1 text-gray-800 mb-3">Create your one-page tweets website</h1>
+                <p>Click the button below to get started</p>
+                <h1 class="display-5 text-dark"><a href="/post/about" class="btn btn-lg btn-primary shadow-sm">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Create Now</a></h1>
+            </div>
+        </div>
+    {{/if}}
+</div>

@@ -1,0 +1,60 @@
+# 
+#  This is used for generating SSL certificates by invoking certbot.
+#   If everything is okay and ready to go live, and you found your generated certs in /etc/letsencrypt/live
+#   change the --staging to --force-renewal and run again via 'docker-compose -f dc-cert.yml up --force-recreate --no-deps certbot'
+#
+#  Tested on the following environment:
+#       Docker version: 18.06.1
+#       Ubuntu Ubuntu 18.04
+#       Docker-compose 1.17.1
+#
+version: "3.7"
+services:
+  web:
+    build: .
+    container_name: web
+    command: npm run dev
+    restart: unless-stopped
+    networks:
+      - tweets-network
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      BASE_URL: "${BASE_URL}"
+      HOME_PAGE_URL: "${HOME_PAGE_URL}"
+      MONGODB_URI: "${MONGODB_URI}"
+      SESSION_SECRET: "${SESSION_SECRET}"
+      TWITTER_KEY: "${TWITTER_KEY}"
+      TWITTER_SECRET: "${TWITTER_SECRET}"
+      SENTRY_DSN: "${SENTRY_DSN}"
+
+  proxy:
+    build: 
+      context: ./nginx-conf
+      dockerfile: Dockerfile-default
+    container_name: proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /tmp/letsencrypt/www:/tmp/letsencrypt/www
+    depends_on:
+      - web
+    networks:
+      - tweets-network
+  
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - /tmp/letsencrypt/www:/var/www
+    depends_on:
+      - proxy
+    command: certonly --webroot --webroot-path=/var/www --email <email here> --agree-tos --no-eff-email --staging -d onepagetweets.com  -d www.onepagetweets.com
+
+networks:
+  tweets-network:
+    driver: bridge  

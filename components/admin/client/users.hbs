@@ -1,0 +1,57 @@
+{{#section 'scripts'}}
+    <script type="application/javascript" defer src="/js/pages/admin/users.js"></script>
+{{/section}}
+<div class="page my-projects-page">
+    <input type="hidden" name="_csrf" value="{{_csrf}}" id="csrf" />
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/admin/dashboard">Admin</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Users</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- display flash messages -->
+    {{> flash}}
+    <!-- display flash messages -->
+    <!-- csrf -->
+    {{#if users}}
+        <div>
+            <table class="table table-borderless table-hover bg-white text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                        <tr>
+                            <td scope="row">
+                                {{name}}
+                            </td>
+                            <td><a href="/{{username}}" target="_blank">{{username}}</a></td>
+                            <td>
+                                <span class="pointer" onclick="deleteUser('{{id}}')">
+                                    <i class="fas fa-trash text-dark"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <div>
+            <div class="d-flex flex-column text-center">
+                <div>
+                    <img src='/images/404.png' width="300px" alt="Generic placeholder image" />
+                </div>
+                <br /><br />
+                <h1 class="h3 mb-1 text-gray-800">No projects available</h1>
+            </div>
+        </div>
+    {{/if}}
+</div>

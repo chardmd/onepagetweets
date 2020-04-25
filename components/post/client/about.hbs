@@ -1,0 +1,73 @@
+{{#section 'head'}}
+    <link href="{{clientCDN.tagifycss}}" rel="stylesheet">
+{{/section}}
+{{#section 'scripts'}}
+    <script type="application/javascript" src="{{clientCDN.tagify}}" defer></script>
+    <script type="application/javascript" defer src="/js/pages/post/about.js"></script>
+{{/section}}
+<div class="page">
+    <ul class="nav nav-pills nav-justified form-tabs mb-4">
+        <li class="nav-item">
+            <a href="#" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 active">
+                <i class="mdi fas fa-info-circle mr-1"></i>
+                <span class="d-none d-sm-inline">About</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 disabled">
+                <i class="mdi fas fa-eye mr-1"></i>
+                <span class="d-none d-sm-inline">Preview</span>
+            </a>
+        </li>
+    </ul>
+    <br />
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- display flash messages -->
+            {{> flash}}
+            <!-- display flash messages -->
+            <input type="hidden" id="csrf" name="_csrf" value="{{_csrf}}" />
+            <div class="card border-0">
+                <div class="card-body">
+                    <form id="aboutForm" class="form" method="POST">
+                        <input type="hidden" id="slugName" name="slugName" value="{{slugName}}" />
+                        <input type="hidden" id="projectId" name="projectId" value="{{projectId}}" />
+                        <div class="form-group">
+                            <label for="headline"><span class="text-dark">Headline</span></label>
+                            <input id="headline" class="form-control" name="headline" type="text"
+                                placeholder="Enter your headline e.g software developer, teacher, etc"
+                                value="{{headline}}" data-parsley-required-message="Please enter headline" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName"><span class="text-dark">Full Name</span></label>
+                            <input id="fullName" class="form-control" name="fullName" type="text"
+                                placeholder="Enter Full Name" value="{{fullName}}"
+                                data-parsley-required-message="Please enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="summary"><span class="text-dark">Summary</span></label>
+                            <textarea id="summary" class="form-control" name="summary" type="text"
+                                placeholder="Hi, I’m Tim. I’m a nurse living in Sydney NSW, Australia. I am a fan of technology, camping, and surfing. I’m also interested in swimming. I worked in Westmead hospital."
+                                {{summary}}" data-parsley-required-message="Please enter a short summary about yourself"
+                                required rows="4">{{summary}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="techStack"><span class="text-dark">Skills</span></label>
+                            <input type="hidden" name="techStackValue" id="techStackValue" value="{{techStack}}" />
+                            <input type="text" id="techStack" class="form-control h-100" name="techStack" type="text"
+                                data-parsley-required-message="Please add your skills" value="" required />
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <button id="buttonNext" class="btn btn-primary float-right" type="submit">
+                                <span id="spinner" class="d-none spinner-border spinner-border-sm mr-1" role="status"
+                                    aria-hidden="true"></span>
+                                <span class="text">Proceed To Next Step</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

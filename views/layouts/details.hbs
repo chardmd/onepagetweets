@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>One Page Tweets | Your Personal Tweets Website</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no,width=1024">
+    <meta name="theme-color" content="#4DA5F4">
+    <meta name="csrf-token">
+    <meta name="turbolinks-cache-control" content="no-preview" />
+    <!-- Google verification -->
+    <meta name="google-site-verification" content="ZQbxjQLoJBdC1qmGRx7Ppg9XPpsntjq3h-fBQFMIffg" />
+    <!-- Fav icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <!-- End Fav icon -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{clientCDN.fontawesome}}">
+    <!-- Custom styles for this template-->
+    <link href="/css/main.css" rel="stylesheet">
+    <!-- page specific head -->
+    {{{_sections.head}}}
+    <!-- Turbo links -->
+    <script type="application/javascript" src="{{clientCDN.turbolinks}}"></script>
+    <!-- jQuery -->
+    <script type="application/javascript" src="{{clientCDN.jquery}}"></script>
+    <!-- Popper -->
+    <script type="application/javascript" src="{{clientCDN.popper}}"></script>
+    <!-- Bootstrap -->
+    <script type="application/javascript" src="{{clientCDN.bootstrap}}"></script>
+    <!-- jQuery easing -->
+    <script type="application/javascript" src="{{clientCDN.jqeasing}}"></script>
+    <!-- Parsley -->
+    <script type="application/javascript" src="{{clientCDN.parsley}}"></script>
+    <script type="application/javascript" src="/js/main.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <div class="container-fluid">
+                    {{{body}}}
+                </div>
+            </div>
+            {{#if displayFooter}}
+                <br />
+                {{> footer}}
+            {{/if}}
+        </div>
+    </div>
+    <!-- page specific scripts -->
+    {{{_sections.scripts}}}
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+version: "1.0"
+stages:
+  - "clone"
+  - "build"
+  - "annotate"
+  - "push"
+  - "deploy"
+steps:
+  clone:
+    type: "git-clone"
+    description: "Cloning main repository..."
+    repo: "chardmd/tweets"
+    revision: "${{CF_BRANCH}}"
+    when:
+      branch:
+        only:
+          - "/master/i"
+    stage: "clone"
+  parallel_build:
+    type: "parallel"
+    title: "Build and update images"
+    steps:
+      build_web:
+        title: "Building Web"
+        type: "build"
+        image_name: "chardmd/web"
+        working_directory: "${{clone}}"
+        tag: "${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}"
+        dockerfile: "Dockerfile"
+      build_proxy:
+        title: "Building Proxy"
+        type: "build"
+        image_name: "chardmd/proxy"
+        working_directory: "${{clone}}/nginx-conf"
+        tag: "${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}"
+        dockerfile: "Dockerfile-nginx"
+    when:
+      branch:
+        only:
+          - "/master/i"
+    stage: "build"
+  annotate_images:
+    type: "parallel"
+    title: "Annotate built images"
+    steps:
+      annotate_build_web:
+        title: "Annotating Build - Web"
+        image: "${{build_web}}"
+        working_directory: "IMAGE_WORK_DIR"
+        commands:
+          - "echo Annotating Build Web..."
+        on_success:
+          metadata:
+            set:
+              - ${{build_web.imageId}}:
+                  - CF_QUALITY: true
+        on_error:
+          metadata:
+            set:
+              - ${{build_web.imageId}}:
+                  - CF_QUALITY: false
+      annotate_build_proxy:
+        title: "Annotating Build - Proxy"
+        image: "${{build_proxy}}"
+        working_directory: "IMAGE_WORK_DIR"
+        commands:
+          - "echo Annotating Build Proxy..."
+        on_success:
+          metadata:
+            set:
+              - ${{build_proxy.imageId}}:
+                  - CF_QUALITY: true
+        on_error:
+          metadata:
+            set:
+              - ${{build_proxy.imageId}}:
+                  - CF_QUALITY: false
+    when:
+      branch:
+        only:
+          - "/master/i"
+    stage: "annotate"
+  parallel_push:
+    type: "parallel"
+    title: "Build and update images"
+    steps:
+      push_web:
+        title: "Pushing Web"
+        type: "push"
+        candidate: "${{build_web}}"
+        tag: "tweets-web-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}"
+        image_name: "onepagetweets/images"
+        registry: "tweetsdockerhub"
+      push_proxy:
+        title: "Pushing Proxy"
+        type: "push"
+        candidate: "${{build_proxy}}"
+        tag: "tweets-proxy-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}"
+        image_name: "onepagetweets/images"
+        registry: "tweetsdockerhub"
+    when:
+      branch:
+        only:
+          - "/master/i"
+    stage: "push"
+  deploy_to_production:
+      image: "onepagetweets/remote-docker:latest"
+      title: "deploying latest version..."
+      working_directory: "${{clone}}"
+      commands:
+        - rdocker ${{RDOCKER_HOST}} docker login -u ${{DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}}
+          \&\& docker pull onepagetweets/images:tweets-proxy-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+          \&\& docker pull onepagetweets/images:tweets-web-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
+          \&\& docker stack deploy -c dc-stack-prod.yml --with-registry-auth ${{DOCKER_STACK_NAME}}
+          \&\& docker service ls
+          \&\& echo "prepare to delete unused objects..."
+          \&\& sleep 8
+          \&\& docker system prune -a -f
+          \&\& docker image prune -a -f
+          \&\& docker container ps
+      environment:
+        - CF_BRANCH_TAG_NORMALIZED=${{CF_BRANCH_TAG_NORMALIZED}}
+        - CF_SHORT_REVISION=${{CF_SHORT_REVISION}}
+        - SSH_KEY=${{SSH_KEY}}
+        - NODE_ENV=production
+        - PORT=8080
+        - HOME_PAGE_URL=${{HOME_PAGE_URL}}
+        - BASE_URL=${{BASE_URL}}
+        - SUPPORT_EMAIL=${{SUPPORT_EMAIL}}
+        - MONGODB_URI=${{MONGODB_URI}}
+        - SESSION_SECRET=${{SESSION_SECRET}}
+        - TWITTER_KEY=${{TWITTER_KEY}}
+        - TWITTER_SECRET=${{TWITTER_SECRET}}
+        - SENTRY_DSN=${{SENTRY_DSN}}
+      when:
+        branch:
+          only:
+            - "/master/i"
+      stage: "deploy"

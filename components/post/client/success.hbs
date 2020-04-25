@@ -1,0 +1,26 @@
+{{#section 'scripts'}}
+    <script type="application/javascript" src="{{clientCDN.clipboard}}" defer></script>
+    <script type="application/javascript" defer src="/js/pages/post/success.js"></script>
+{{/section}}
+<div class="page page-preview page-transition">
+    <div class="row">
+        <div class="d-flex w-100 text-center flex-column">
+            <div class="m-4">
+                <img src="/images/package.png" alt="success" />
+            </div>
+            <h2 class="text-primary m-3">Your website has been published</h2>
+            <div class="w-100 d-flex mt-3 justify-content-center">
+                <input type="text" class="form-control w-50" id="txtCopy" value="{{baseUrl}}/{{username}}" />
+                <button class="btn btn-primary ml-3 mr-3 w-25" type="button" id="btnCopy"
+                    data-clipboard-target="#txtCopy">
+                    <span class="text mr-3">Copy</span><i class="fas fa-check-circle d-none"></i>
+                </button>
+            </div>
+            <div class="m-4">
+                <a href="/{{username}}" target="_blank" id="btnPreview" class="mt-1">
+                    <span class="mr-3">Visit Your Site</span><i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

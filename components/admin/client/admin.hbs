@@ -1,0 +1,27 @@
+<div class="page my-projects-page">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Admin</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- display flash messages -->
+    {{> flash}}
+    <!-- display flash messages -->
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Users</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{userTotal}}</h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Total</li>
+                </ul>
+                <a href="/admin/users" class="btn btn-lg btn-block btn-outline-primary" role="button">View</a>
+            </div>
+        </div>
+    </div>
+</div>

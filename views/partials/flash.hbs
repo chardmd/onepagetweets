@@ -1,0 +1,40 @@
+{{#if messages.errors.length}}
+    <div class="alert alert-danger fade show">
+        <button class="close" type="button" data-dismiss="alert">
+            <i class="far fa-times-circle"></i>
+        </button>
+        {{#each messages.errors}}
+            <div>{{msg}}</div>
+        {{/each}}
+    </div>
+{{/if}}
+{{#if messages.info.length}}
+    <div class="alert alert-info fade show">
+        <button class="close" type="button" data-dismiss="alert">
+            <i class="far fa-times-circle"></i>
+        </button>
+        {{#each messages.info}}
+            <div>{{msg}}</div>
+        {{/each}}
+    </div>
+{{/if}}
+{{#if messages.success.length}}
+    <div class="alert alert-success fade show">
+        <button class="close" type="button" data-dismiss="alert">
+            <i class="far fa-times-circle"></i>
+        </button>
+        {{#each messages.success}}
+            <div>{{msg}}</div>
+        {{/each}}
+    </div>
+{{/if}}
+{{#if messages.warning.length}}
+    <div class="alert alert-warning fade show">
+        <button class="close" type="button" data-dismiss="alert">
+            <i class="far fa-times-circle"></i>
+        </button>
+        {{#each messages.warning}}
+            <div>{{msg}}</div>
+        {{/each}}
+    </div>
+{{/if}}

@@ -1,0 +1,123 @@
+/** Home page css **/
+.home-page {
+    .buttonLink a {
+        text-decoration: none;
+    }
+
+    .buttonLink:hover,
+    :focus {
+        a {
+            color: white;
+        }
+    }
+
+    .badge {
+        font-size: 14px;
+    }
+}
+
+.details-page {
+
+    .row {
+        .col-sm {
+            padding: 0;
+        }
+    }
+
+    .alert-warning {
+        position: absolute;
+        top: 20px;
+    }
+
+    .twitter {
+        height: 100vh;
+        overflow-y: scroll;
+        text-align: center;
+    }
+
+    .wrapper {
+        width: 70%;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        background-color: #eff6fb;
+        @media (max-width: 800px) {
+            padding: 0;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .headline {
+        margin: 0 0 0.4rem 0;
+        padding: 0;
+        color: #1da1f2;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
+        font-size: 1.7rem;
+        line-height: 1.1;
+    }
+
+    .fullname {
+        color: black;
+        margin: 0 0 0.5rem 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+            Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        font-weight: 800;
+        text-rendering: optimizeLegibility;
+        font-size: 3.1rem;
+        letter-spacing: -0.027rem;
+    }
+
+    .about {
+        color: hsla(0, 0%, 0%, 0.8);
+        font-family: sans-serif;
+        font-weight: normal;
+        word-wrap: break-word;
+        font-kerning: normal;
+        padding: 0;
+        margin: 0 0 0.5rem 0;
+    }
+}
+
+.landing-page {
+
+    h1 {
+        color: $gray-900;
+    }
+
+    .landingLogo {
+        text-decoration: none;
+        color: $black;
+    }
+    
+    h3 {
+        letter-spacing: 1px;
+        color: $black;
+    }
+
+    .text-desc {
+        color: $gray-700;
+    }
+
+    .twitter {
+        height: 60vh;
+        overflow-y: scroll;
+        text-align: center;
+    }
+
+    .badge {
+        padding: 5px 12px;
+        font-size: 0.8125rem;
+        margin: 5px 2px 2px 2px;
+    }
+}

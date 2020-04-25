@@ -1,0 +1,86 @@
+{{#section 'head'}}
+    <link href="{{clientCDN.tagifycss}}" rel="stylesheet">
+{{/section}}
+{{#section 'scripts'}}
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script type="application/javascript" src="{{clientCDN.tagify}}" defer></script>
+    <script type="application/javascript" defer src="/js/pages/post/preview.js"></script>
+{{/section}}
+<div class="page page-preview">
+    <ul class="nav nav-pills nav-justified mb-4 form-tabs">
+        <li class="nav-item">
+            <a href="/post/about" class="nav-link rounded-0 pt-2 pb-2">
+                <i class="mdi fas fa-info-circle mr-1"></i>
+                <span class="d-none d-sm-inline">About</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link rounded-0 pt-2 pb-2 active">
+                <i class="mdi fas fa-eye mr-1"></i>
+                <span class="d-none d-sm-inline">Preview</span>
+            </a>
+        </li>
+    </ul>
+    <br />
+    <div>
+        <input type="hidden" name="_csrf" value="{{_csrf}}" id="csrf" />
+        <div class="row">
+            <div class="col-sm">
+                <div class="container">
+                    <div class="wrapper">
+                        <h1 class="headline">{{headline}}</h1>
+                        <h2 class="fullname">{{fullName}}</h2>
+                        <p class="about">{{summary}}</p>
+                        <div>
+                            <h6 class="font-14 text-dark ml-1">Skills</h6>
+                            <input type="hidden" name="techStackValue" id="techStackValue" value="{{techStack}}" />
+                            <input id="techStack" type="text" readonly class="tagify form-control-plaintext border-0"
+                                value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm twitter">
+                <a class="twitter-timeline" href="https://twitter.com/{{username}}?ref_src=twsrc%5Etfw">Loading...</a>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <p>
+                    <a href="/post/{{username}}" target="_blank" id="btnPreview" class="mt-1">
+                        See Full Preview&nbsp;<i class="fas fa-external-link-alt"></i>
+                    </a>
+                    &nbsp;
+                    <button class="btn btn-primary ml-1" type="button" id="btnConfirm">
+                        Publish Now
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirmDialog" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div>
+                    <div>
+                        <h5 class="mt-2 text-secondary">Publish profile</h5>
+                        <hr />
+                        <p class="mt-3">This profile will go live when you publish it.</p>
+                    </div>
+                    <div class="text-right">
+                        <button id="btnPublish" class="btn btn-success my-2" type="button">
+                            <span id="spinner" class="d-none spinner-border spinner-border-sm mr-1" role="status"
+                                aria-hidden="true"></span>
+                            <span class="text">Publish</span>
+                        </button>
+                        &nbsp;
+                        <button type="button" class="btn btn-secondary my-2" data-dismiss="modal"
+                            id="btnClose">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

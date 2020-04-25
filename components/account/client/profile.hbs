@@ -1,0 +1,21 @@
+<div class="page">
+    <!-- display flash messages -->
+    {{> flash}}
+    <!-- display flash messages -->
+    <div class="card border-0">
+        <div class="card-body">
+            <form action="/account/delete" method="POST">
+                <input type="hidden" name="_csrf" value="{{_csrf}}">
+                <div class="pb-2 mt-2 mb-4 border-bottom">
+                    <h4>Manage My Account</h4>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <p>Once you delete this account, there is no going back. Please be certain.</p>
+                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash fa-sm"></i>&nbsp;Delete
+                            Account</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

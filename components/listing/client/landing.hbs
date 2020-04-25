@@ -1,0 +1,82 @@
+{{#section 'head'}}
+    <!-- Search Engine -->
+    <meta name="description" content="Your marketplace for buying & selling micro projects">
+    <meta name="image" content="{{baseUrl}}/images/profile.png">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="One Page Tweets">
+    <meta itemprop="description" content="Promote yourself and use the power of tweets to build your profile">
+    <!-- open graph -->
+    <meta property="og:title" content="One Page Tweets - Your personal homepage">
+    <meta property="og:type" content="product">
+    <meta property="og:description" content="Create your free, one-page website in just few clicks">
+    <meta property="og:url" content="{{baseUrl}}">
+    <meta property="og:image" content="{{baseUrl}}/images/profile.png">
+    <meta property="og:image:alt" content="opt">
+    <!-- twitter -->
+    <meta name="twitter:title"
+        content="One Page Tweets - Promote yourself and use the power of tweets to build your profile">
+    <meta name="twitter:description" content="Create your free, one-page website in just few clicks">
+    <meta name="twitter:image" content="{{baseUrl}}/images/profile.png">
+    <meta name="twitter:site" content="@onepagetweets">
+    <meta name="twitter:creator" content="@onepagetweets">
+{{/section}}
+{{#section 'scripts'}}
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script type="application/javascript" defer src="/js/pages/listing/landing.js"></script>
+{{/section}}
+<div class="page landing-page">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-xl-6 offset-xl-1 order-2 mb-5 mb-md-0">
+                <div class="p-3 d-flex justify-content-center">
+                    {{#if username}}
+                        <div class="col-sm twitter">
+                            <a class="twitter-timeline"
+                                href="https://twitter.com/{{username}}?ref_src=twsrc%5Etfw">Loading...</a>
+                        </div>
+                    {{else}}
+                        <img class="img-fluid" src="/images/man.png" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="col-12 col-xl-5 order-xl-1 order-1 my-5">
+                <div class="text-center">
+                    <h3 class="text-uppercase mb-4">
+                        <a href="/" class="landingLogo">
+                            <img class="img mt-1" src="/images/profile.png" width="100" height="100" />
+                            One Page Tweets
+                        </a>
+                    </h3>
+                    <h1 class="display-5 mb-3">
+                        Create your free, one-page website in just few clicks.
+                    </h1>
+                    <p class="mb-4 text-desc">
+                        Promote yourself and use the power of tweets to build your profile.
+                    </p>
+                    <a class="btn btn-lg btn-primary mb-5 font-weight-bolder" style="font-size:1.5em;"
+                        href="/auth/twitter"><i class='fab fa-twitter'></i> Sign in with Twitter</a>
+                    <p class="badges">
+                        <a href="/" class="badge badge-pill
+                                {{#eq username undefined}}
+                                    badge-primary
+                                {{else}}
+                                    badge-secondary
+                                {{/eq}}">
+                            Default
+                        </a>
+                        {{#each sampleAccounts}}
+                            <a href="/?u={{value}}" class="badge badge-pill
+                                {{#eq ../username value}}
+                                    badge-primary
+                                {{else}}
+                                    badge-secondary
+                                {{/eq}}">
+                                {{label}}
+                            </a>
+                        {{/each}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
