@@ -163,6 +163,28 @@ docker rmi $(docker images -a -q) -f
 
 * Exit the server
 
+## Generating Diffie-Hellman key to be used in SSL
+
+Enabling SSL will also involve specifying our Diffie-Hellman group, which we will use for [Perfect Forward Secrecy](https://en.wikipedia.org/wiki/Forward_secrecy):
+
+* In your terminal, generate the key via:
+
+```
+sudo openssl dhparam -out dhparam-2048.pem 2048
+```
+* Login to the droplet server and create a directory in `/etc/ssl/dhparam`
+
+* transfer the `dhparam-2048.pem` into that directory.
+
+* If you go to `nginx-conf/nginx.conf`, you will see this configuration.
+
+```
+
+//nginx-conf/nginx.conf
+
+ssl_dhparam /etc/ssl/dhparam/dhparam-2048.pem;
+```
+
 ## Let Google Crawl the webapp
 
 * Go to this site https://search.google.com/search-console
@@ -187,4 +209,4 @@ Richard Dimalanta [https://chardmd.com](http://chardmd.com)
 
 ## License
 
-This project is released under the [MIT License](LICENSE).
+This project is released under the [MIT License](License).
