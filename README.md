@@ -1,7 +1,5 @@
 ## One Page Tweets
 
-https://onepagetweets.com
-
 Promote yourself and use the power of tweets to build your profile.
 
 ![Alt Text](preview.png)
