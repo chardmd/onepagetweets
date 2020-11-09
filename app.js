@@ -17,6 +17,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const sass = require('node-sass-middleware');
 const Sentry = require('@sentry/node');
+const Tracing = require('@sentry/tracing');
 const clientCDN = require('./client-cdn');
 const appRouter = require('./components/app/appRoutes');
 const hbs = require('./components/app/appService');
@@ -35,11 +36,24 @@ const app = express();
 
 /** initialise Sentry */
 Sentry.init({
-  dsn: process.env.SENTRY_DSN
+  dsn: process.env.SENTRY_DSN,
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+    // enable Express.js middleware tracing
+    new Tracing.Integrations.Express({ app })
+  ],
+
+  // We recommend adjusting this value in production, or using tracesSampler
+  // for finer control
+  tracesSampleRate: 1.0
 });
 
-// The request handler must be the first middleware on the app
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
 app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
 
 /**
  * Connect to MongoDB.
