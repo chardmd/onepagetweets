@@ -3,7 +3,7 @@
 function disableLoading() {
   $('#spinner').addClass('d-none');
   $('#buttonNext').attr('disabled', false);
-  $('#buttonNext .text').text('Proceed To Next Step');
+  $('#buttonNext .text').text('Capture');
 }
 
 function enableLoading() {
@@ -13,13 +13,13 @@ function enableLoading() {
 }
 
 function initTagify() {
-    // The DOM element you wish to replace with Tagify
-    const input = $('#techStack').get(0);
-    // init Tagify script on the above inputs
-    const tagifyInstance = new Tagify(input);
-    let techStackValue = $('#techStackValue').val();
-    techStackValue = techStackValue === "" ? "" : techStackValue;
-    tagifyInstance.addTags(techStackValue);
+  // The DOM element you wish to replace with Tagify
+  const input = $('#techStack').get(0);
+  // init Tagify script on the above inputs
+  const tagifyInstance = new Tagify(input);
+  let techStackValue = $('#techStackValue').val();
+  techStackValue = techStackValue === '' ? '' : techStackValue;
+  tagifyInstance.addTags(techStackValue);
 }
 
 $(function() {
