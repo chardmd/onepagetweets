@@ -6,10 +6,6 @@ function disableLoading() {
   $('#btnPublish .text').text('Publish');
 }
 
-console.log('------------------------------------');
-console.log('test');
-console.log('------------------------------------');
-
 function enableLoading() {
   $('#spinner').removeClass('d-none');
   $('#btnPublish').attr('disabled', true);
