@@ -21,7 +21,7 @@
     "dc:cert": "docker-compose -f dc-cert.yml build  && docker-compose -f dc-cert.yml up -d && docker-compose -f dc-cert.yml ps",
     "test": "nyc mocha --timeout=10000 --exit",
     "lint": "eslint \"**/*.js\"",
-    "copy": "copyfiles -f ./components/*/client/*.js ./public/js/pages"
+    "copy": "copyfiles -f ./components/*/client/*.js ./public/js"
   },
   "dependencies": {
     "@sentry/node": "^5.27.3",
