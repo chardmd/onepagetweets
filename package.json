@@ -13,14 +13,15 @@
   "scripts": {
     "postinstall": "npm rebuild node-sass",
     "start": "node app.js",
-    "debug": "nodemon --inspect app.js",
+    "debug": "nodemon --ignore public --exec \"npm run copy\"",
     "dc:up": "docker-compose -f dc-stack-dev.yml build && env $(cat .env | grep ^[A-Z] | xargs) docker stack deploy -c dc-stack-dev.yml app && docker service ls",
     "dc:kill": "docker stack rm app",
     "dc:clean": "docker rm -f $(docker ps -a -q) && docker volume prune -f",
     "dc:clean:img": "docker rmi $(docker images -a -q) -f",
     "dc:cert": "docker-compose -f dc-cert.yml build  && docker-compose -f dc-cert.yml up -d && docker-compose -f dc-cert.yml ps",
     "test": "nyc mocha --timeout=10000 --exit",
-    "lint": "eslint \"**/*.js\""
+    "lint": "eslint \"**/*.js\"",
+    "copy": "copyfiles -f ./components/*/client/*.js ./public/js/pages"
   },
   "dependencies": {
     "@sentry/node": "^5.27.3",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "copyfiles": "^2.4.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.9.0",

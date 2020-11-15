@@ -5,12 +5,15 @@ function disableLoading() {
   $('#buttonNext').attr('disabled', false);
   $('#buttonNext .text').text('Capture');
 }
-
 function enableLoading() {
   $('#spinner').removeClass('d-none');
   $('#buttonNext').attr('disabled', true);
   $('#buttonNext .text').text('Saving...');
 }
+
+console.log('------------------------------------');
+console.log('t11123');
+console.log('------------------------------------');
 
 function initTagify() {
   // The DOM element you wish to replace with Tagify
