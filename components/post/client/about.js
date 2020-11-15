@@ -11,10 +11,6 @@ function enableLoading() {
   $('#buttonNext .text').text('Saving...');
 }
 
-console.log('------------------------------------');
-console.log('t11123');
-console.log('------------------------------------');
-
 function initTagify() {
   // The DOM element you wish to replace with Tagify
   const input = $('#techStack').get(0);

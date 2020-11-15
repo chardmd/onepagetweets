@@ -1,0 +1,6 @@
+{
+    "events": {
+      "restart": "npm run copy"
+    },
+    "ignore": ["public/js/pages/*"]
+}
