@@ -173,6 +173,9 @@ app.use(
 app.use('/js/lib', [
   express.static(path.join(__dirname, 'node_modules/jquery/dist'), {
     maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/turbolinks/dist'), {
+    maxAge: 31557600000
   })
 ]);
 

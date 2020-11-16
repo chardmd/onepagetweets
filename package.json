@@ -50,6 +50,7 @@
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-twitter": "^1.0.4",
+    "turbolinks": "^5.2.0",
     "validator": "^12.2.0"
   },
   "devDependencies": {
