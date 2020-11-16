@@ -176,6 +176,9 @@ app.use('/js/lib', [
   }),
   express.static(path.join(__dirname, 'node_modules/turbolinks/dist'), {
     maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), {
+    maxAge: 31557600000
   })
 ]);
 
