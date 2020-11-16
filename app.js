@@ -194,6 +194,9 @@ app.use('/js/lib', [
   }),
   express.static(path.join(__dirname, 'node_modules/font-awesome'), {
     maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/@yaireo/tagify/dist'), {
+    maxAge: 31557600000
   })
 ]);
 
