@@ -24,6 +24,7 @@
     "copy": "copyfiles -f ./components/*/client/*.js ./public/js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "@sentry/node": "^5.27.3",
     "@sentry/tracing": "^5.27.3",
     "@yaireo/tagify": "^3.21.4",
@@ -41,7 +42,6 @@
     "express-flash": "^0.0.2",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
-    "font-awesome": "^4.7.0",
     "handlebars-helpers": "^0.10.0",
     "jquery": "^3.5.1",
     "jquery.easing": "^1.4.1",
