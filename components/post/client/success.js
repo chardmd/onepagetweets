@@ -12,12 +12,10 @@ function initClipboard() {
 }
 
 $(function() {
-
   //clipboard copy
   initClipboard();
 
   $('#btnCopy').click(function() {
     copiedButton();
-  })
-
+  });
 });
