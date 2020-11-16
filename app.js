@@ -179,6 +179,21 @@ app.use('/js/lib', [
   }),
   express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), {
     maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), {
+    maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/jquery.easing'), {
+    maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/parsleyjs/dist'), {
+    maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/sharer.js'), {
+    maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/font-awesome'), {
+    maxAge: 31557600000
   })
 ]);
 
