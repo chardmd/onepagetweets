@@ -169,6 +169,13 @@ app.use(
   })
 );
 
+//frontend assets
+app.use('/js/lib', [
+  express.static(path.join(__dirname, 'node_modules/jquery/dist'), {
+    maxAge: 31557600000
+  })
+]);
+
 //  Connect all our routes to our application
 app.use('/', appRouter);
 
