@@ -18,7 +18,6 @@ const passport = require('passport');
 const sass = require('node-sass-middleware');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
-const clientCDN = require('./client-cdn');
 const appRouter = require('./components/app/appRoutes');
 const hbs = require('./components/app/appService');
 
@@ -141,8 +140,6 @@ app.use(async (req, res, next) => {
 
   // set HOME_PAGE_URL
   res.locals.homePageUrl = process.env.HOME_PAGE_URL;
-  // store cdn configuration
-  res.locals.clientCDN = clientCDN;
   next();
 });
 app.use((req, res, next) => {
@@ -196,6 +193,9 @@ app.use('/js/lib', [
     maxAge: 31557600000
   }),
   express.static(path.join(__dirname, 'node_modules/@yaireo/tagify/dist'), {
+    maxAge: 31557600000
+  }),
+  express.static(path.join(__dirname, 'node_modules/clipboard/dist'), {
     maxAge: 31557600000
   })
 ]);
