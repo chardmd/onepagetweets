@@ -20,6 +20,10 @@ const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 const appRouter = require('./components/app/appRoutes');
 const hbs = require('./components/app/appService');
+const {
+  jsLibraries,
+  cssLibraries
+} = require('./components/app/frontendAssets');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -167,41 +171,7 @@ app.use(
 );
 
 //frontend assets
-app.use('/js/lib', [
-  express.static(path.join(__dirname, 'node_modules/jquery/dist'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/turbolinks/dist'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/jquery.easing'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/parsleyjs/dist'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/sharer.js'), {
-    maxAge: 31557600000
-  }),
-  express.static(
-    path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(path.join(__dirname, 'node_modules/@yaireo/tagify/dist'), {
-    maxAge: 31557600000
-  }),
-  express.static(path.join(__dirname, 'node_modules/clipboard/dist'), {
-    maxAge: 31557600000
-  })
-]);
+app.use('/js/lib', [...jsLibraries, cssLibraries]);
 
 //  Connect all our routes to our application
 app.use('/', appRouter);
