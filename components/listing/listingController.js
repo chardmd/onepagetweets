@@ -82,7 +82,7 @@ exports.getHome = async (req, res) => {
     // render landing page
     res.render('listing/client/landing', {
       title: 'Landing',
-      layout: 'details',
+      layout: 'basic',
       username: u,
       sampleAccounts,
       displayFooter: true,
@@ -101,7 +101,7 @@ exports.getDetails = async (req, res) => {
   if (project) {
     res.render('listing/client/details', {
       title: 'Home',
-      layout: 'details',
+      layout: 'basic',
       username,
       headline: project !== null ? project.headline : '',
       fullName: project !== null ? project.fullName : '',

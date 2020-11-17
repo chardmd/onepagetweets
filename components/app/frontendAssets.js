@@ -11,6 +11,7 @@ const librariesPath = [
   'node_modules/sharer.js',
   'node_modules/@yaireo/tagify/dist',
   'node_modules/clipboard/dist',
+  'node_modules/html2canvas/dist',
   'node_modules/@fortawesome/fontawesome-free'
 ];
 
