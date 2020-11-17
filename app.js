@@ -20,10 +20,7 @@ const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 const appRouter = require('./components/app/appRoutes');
 const hbs = require('./components/app/appService');
-const {
-  jsLibraries,
-  cssLibraries
-} = require('./components/app/frontendAssets');
+const jsLibraries = require('./components/app/frontendAssets');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -171,7 +168,7 @@ app.use(
 );
 
 //frontend assets
-app.use('/js/lib', [...jsLibraries, cssLibraries]);
+app.use('/js/lib', jsLibraries);
 
 //  Connect all our routes to our application
 app.use('/', appRouter);

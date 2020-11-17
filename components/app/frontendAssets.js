@@ -1,72 +1,23 @@
 const express = require('express');
 const path = require('path');
 
-const jsLibraries = [
-  express.static(path.join(__dirname, '..', '..', 'node_modules/jquery/dist'), {
-    maxAge: 31557600000
-  }),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/turbolinks/dist'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/popper.js/dist/umd'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/bootstrap/dist/js'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/jquery.easing'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/parsleyjs/dist'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(path.join(__dirname, '..', '..', 'node_modules/sharer.js'), {
-    maxAge: 31557600000
-  }),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/@yaireo/tagify/dist'),
-    {
-      maxAge: 31557600000
-    }
-  ),
-  express.static(
-    path.join(__dirname, '..', '..', 'node_modules/clipboard/dist'),
-    {
-      maxAge: 31557600000
-    }
-  )
+const librariesPath = [
+  'node_modules/jquery/dist',
+  'node_modules/turbolinks/dist',
+  'node_modules/popper.js/dist/umd',
+  'node_modules/bootstrap/dist/js',
+  'node_modules/jquery.easing',
+  'node_modules/parsleyjs/dist',
+  'node_modules/sharer.js',
+  'node_modules/@yaireo/tagify/dist',
+  'node_modules/clipboard/dist',
+  'node_modules/@fortawesome/fontawesome-free'
 ];
 
-const cssLibraries = [
-  express.static(
-    path.join(
-      __dirname,
-      '..',
-      '..',
-      'node_modules/@fortawesome/fontawesome-free'
-    ),
-    {
-      maxAge: 31557600000
-    }
-  )
-];
+const jsLibraries = librariesPath.map(value =>
+  express.static(path.join(__dirname, '..', '..', value), {
+    maxAge: 31557600000
+  })
+);
 
-module.exports = {
-  jsLibraries,
-  cssLibraries
-};
+module.exports = jsLibraries;
