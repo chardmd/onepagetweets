@@ -28,7 +28,23 @@ const submitForm = () => {
   });
 };
 
+const setButtonActive = text => {
+  let empty = text.length == 0;
+  if (empty) {
+    $('#buttonNext').attr('disabled', true);
+  } else {
+    $('#buttonNext').attr('disabled', false);
+  }
+};
+
 $(() => {
+  //on input press
+  $('#summary').on('keyup', function() {
+    let text = $(this).val();
+    setButtonActive(text);
+  });
+
+  //submit form
   $('#aboutForm').on('submit', e => {
     e.preventDefault();
     submitForm();
