@@ -103,10 +103,7 @@ exports.getDetails = async (req, res) => {
       title: 'Home',
       layout: 'basic',
       username,
-      headline: project !== null ? project.headline : '',
-      fullName: project !== null ? project.fullName : '',
       summary: project !== null ? project.summary : '',
-      techStack: project !== null ? project.techStack : [],
       baseUrl: process.env.BASE_URL
     });
   } else {

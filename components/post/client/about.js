@@ -1,48 +1,19 @@
-/* eslint-disable */
-
-function disableLoading() {
+const disabledLoading = () => {
   $('#spinner').addClass('d-none');
   $('#buttonNext').attr('disabled', false);
   $('#buttonNext .text').text('Capture');
-}
-function enableLoading() {
+};
+
+const enableLoading = () => {
   $('#spinner').removeClass('d-none');
   $('#buttonNext').attr('disabled', true);
   $('#buttonNext .text').text('Saving...');
-}
+};
 
-function initTagify() {
-  // The DOM element you wish to replace with Tagify
-  const input = $('#techStack').get(0);
-  // init Tagify script on the above inputs
-  const tagifyInstance = new Tagify(input);
-  let techStackValue = $('#techStackValue').val();
-  techStackValue = techStackValue === '' ? '' : techStackValue;
-  tagifyInstance.addTags(techStackValue);
-}
-
-$(function() {
-  // init validation
-  $('#aboutForm').parsley();
-
-  // reset button state
-  disableLoading();
-
-  //init tagify
-  initTagify();
-
+$(() => {
   // submit form
-  $('#aboutForm').submit(function(e) {
+  $('#aboutForm').on('submit', e => {
     e.preventDefault();
-    // validate form
-    if (
-      !$('#aboutForm')
-        .parsley()
-        .validate()
-    ) {
-      return false;
-    }
-
     $.ajax({
       type: 'POST',
       url: '/post/about',

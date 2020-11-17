@@ -9,10 +9,7 @@ exports.getAbout = async (req, res) => {
   const project = await PostDAL.getProjectByUserId(user.id);
   res.render('post/client/about', {
     title: 'About Info',
-    headline: project !== null ? project.headline : '',
-    fullName: project !== null ? project.fullName : '',
-    summary: project !== null ? project.summary : '',
-    techStack: project !== null ? project.techStack : []
+    summary: project !== null ? project.summary : ''
   });
 };
 

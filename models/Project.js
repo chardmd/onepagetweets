@@ -4,13 +4,7 @@ const { Schema } = mongoose;
 
 const projectSchema = new Schema(
   {
-    headline: String,
-    fullName: String,
     summary: String,
-    techStack: {
-      type: Array,
-      default: []
-    },
     isPublished: {
       type: Boolean,
       default: false
