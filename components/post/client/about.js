@@ -1,16 +1,16 @@
-const disabledLoading = () => {
+function disabledLoading() {
   $('#spinner').addClass('d-none');
   $('#buttonNext').attr('disabled', false);
   $('#buttonNext .text').text('Capture');
-};
+}
 
-const enableLoading = () => {
+function enableLoading() {
   $('#spinner').removeClass('d-none');
   $('#buttonNext').attr('disabled', true);
   $('#buttonNext .text').text('Saving...');
-};
+}
 
-const submitForm = () => {
+function submitForm() {
   $.ajax({
     type: 'POST',
     url: '/post/about',
@@ -26,18 +26,18 @@ const submitForm = () => {
       Turbolinks.visit(`/post/about`);
     }
   });
-};
+}
 
-const setButtonActive = text => {
+function setButtonActive(text) {
   let empty = text.length == 0;
   if (empty) {
     $('#buttonNext').attr('disabled', true);
   } else {
     $('#buttonNext').attr('disabled', false);
   }
-};
+}
 
-$(() => {
+$(function() {
   //on input press
   $('#summary').on('keyup', function() {
     let text = $(this).val();
@@ -45,7 +45,7 @@ $(() => {
   });
 
   //submit form
-  $('#aboutForm').on('submit', e => {
+  $('#aboutForm').on('submit', function(e) {
     e.preventDefault();
     submitForm();
   });
