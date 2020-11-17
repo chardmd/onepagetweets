@@ -11,10 +11,7 @@ exports.getHome = async (req, res) => {
       title: 'Home',
       projExist: project !== null,
       isPublished: project !== null ? project.isPublished : false,
-      headline: project !== null ? project.headline : '',
-      fullName: project !== null ? project.fullName : '',
       summary: project !== null ? project.summary : '',
-      techStack: project !== null ? project.techStack : [],
       baseUrl: process.env.BASE_URL
     });
   } else {
