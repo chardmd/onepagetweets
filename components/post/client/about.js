@@ -40,6 +40,8 @@
       }
     }
   }
+
+  //init and events
   $(function() {
     const postAbout = new About();
 
