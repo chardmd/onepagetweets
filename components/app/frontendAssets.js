@@ -7,7 +7,6 @@ const librariesPath = [
   'node_modules/popper.js/dist/umd',
   'node_modules/bootstrap/dist/js',
   'node_modules/jquery.easing',
-  'node_modules/parsleyjs/dist',
   'node_modules/sharer.js',
   'node_modules/@yaireo/tagify/dist',
   'node_modules/clipboard/dist',

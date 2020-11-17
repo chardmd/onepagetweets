@@ -10,24 +10,27 @@ const enableLoading = () => {
   $('#buttonNext .text').text('Saving...');
 };
 
+const submitForm = () => {
+  $.ajax({
+    type: 'POST',
+    url: '/post/about',
+    data: $('#aboutForm').serialize(),
+    beforeSend() {
+      enableLoading();
+    },
+    success() {
+      Turbolinks.visit(`/post/preview`);
+    },
+    error(err) {
+      console.log(err);
+      Turbolinks.visit(`/post/about`);
+    }
+  });
+};
+
 $(() => {
-  // submit form
   $('#aboutForm').on('submit', e => {
     e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: '/post/about',
-      data: $('#aboutForm').serialize(),
-      beforeSend() {
-        enableLoading();
-      },
-      success() {
-        Turbolinks.visit(`/post/preview`);
-      },
-      error(err) {
-        console.log(err);
-        Turbolinks.visit(`/post/about`);
-      }
-    });
+    submitForm();
   });
 });

@@ -67,34 +67,14 @@ exports.getSuccess = async (req, res) => {
  * POST /post/about
  */
 exports.postAbout = async (req, res) => {
-  const {
-    headline = '',
-    fullName = '',
-    summary = '',
-    techStack = []
-  } = req.body;
+  const { summary = '' } = req.body;
 
   const { user } = req;
 
   const validationErrors = [];
-  if (validator.isEmpty(headline)) {
-    validationErrors.push({
-      msg: 'Please enter headline.'
-    });
-  }
-  if (validator.isEmpty(fullName)) {
-    validationErrors.push({
-      msg: 'Please enter fullName.'
-    });
-  }
   if (validator.isEmpty(summary)) {
     validationErrors.push({
       msg: 'Please enter summary.'
-    });
-  }
-  if (techStack.length === 0) {
-    validationErrors.push({
-      msg: 'Please enter technological stack.'
     });
   }
   if (validationErrors.length) {
