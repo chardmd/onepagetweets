@@ -86,10 +86,7 @@ exports.postAbout = async (req, res) => {
     await PostDAL.updateProjectByUserId({
       userId: user.id,
       fields: {
-        headline,
-        fullName,
         summary,
-        techStack: JSON.parse(techStack).map(x => x.value),
         isPublished: false
       }
     });
