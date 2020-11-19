@@ -2,7 +2,7 @@
   const disabledLoading = () => {
     $('#spinner').addClass('d-none');
     $('#buttonNext').attr('disabled', false);
-    $('#buttonNext .text').text('Capture');
+    $('#buttonNext .text').text('Next');
   };
 
   const enableLoading = () => {
