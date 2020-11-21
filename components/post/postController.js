@@ -106,7 +106,11 @@ exports.postAbout = async (req, res) => {
  * PATCH /post/publish
  */
 exports.publish = async (req, res) => {
-  const { user } = req;
+  const { user, body } = req;
+  const { screenshot } = body;
+  console.log('------------------------------------');
+  console.log(screenshot);
+  console.log('------------------------------------');
   const project = await PostDAL.getProjectByUserId(user.id);
   if (!project.isPublished) {
     await PostDAL.updateProjectByUserId({

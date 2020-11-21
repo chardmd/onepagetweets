@@ -35,7 +35,7 @@ post.post(
 );
 
 /** PATCH */
-post.patch(
+post.post(
   '/post/publish',
   middlewareUtil.isAuthenticated,
   postController.publish

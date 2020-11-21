@@ -15,35 +15,40 @@
     const imageCanvas = $('#capture').get(0);
     const canvas = await html2canvas(imageCanvas);
     var dataURL = canvas.toDataURL();
-    console.log('------------------------------------');
-    console.log(dataURL);
-    console.log('------------------------------------');
+    await uploadToServer(dataURL);
+  };
+
+  const uploadToServer = async canvasData => {
+    const csrf = $('#csrf').val();
+    $.ajax({
+      type: 'POST',
+      data: {
+        _csrf: csrf,
+        screenshot: canvasData
+      },
+      url: `/post/publish`,
+      beforeSend() {
+        enableLoading();
+      },
+      success() {
+        $('#confirmDialog').modal('hide');
+        capture();
+      },
+      complete() {
+        Turbolinks.visit(`/post/success`);
+      },
+      error() {
+        Turbolinks.visit(`/post/preview`);
+      }
+    });
   };
 
   //init and events
   $(() => {
     disableLoading();
 
-    $('#btnPublish').click(() => {
-      const csrf = $('#csrf').val();
-      $.ajax({
-        type: 'PATCH',
-        data: {
-          _csrf: csrf
-        },
-        url: `/post/publish`,
-        beforeSend() {
-          enableLoading();
-        },
-        success() {
-          $('#confirmDialog').modal('hide');
-          capture();
-          //Turbolinks.visit(`/post/success`);
-        },
-        error() {
-          Turbolinks.visit(`/post/preview`);
-        }
-      });
+    $('#btnPublish').click(async () => {
+      await capture();
     });
 
     $('#btnConfirm').on('click', () => {
