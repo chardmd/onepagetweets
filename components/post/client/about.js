@@ -1,4 +1,4 @@
-(function() {
+(() => {
   const disabledLoading = () => {
     $('#spinner').addClass('d-none');
     $('#buttonNext').attr('disabled', false);
@@ -40,15 +40,15 @@
   };
 
   //init and events
-  $(function() {
+  $(() => {
     //on input press
-    $('#summary').on('keyup', function() {
-      let text = $(this).val();
+    $('#summary').on('keyup', () => {
+      let text = $('#summary').val();
       setButtonActive(text);
     });
 
     //submit form
-    $('#aboutForm').on('submit', function(e) {
+    $('#aboutForm').on('submit', e => {
       e.preventDefault();
       submitForm();
     });

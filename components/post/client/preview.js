@@ -1,31 +1,30 @@
-(function() {
-  function disableLoading() {
+(() => {
+  const disableLoading = () => {
     $('#spinner').addClass('d-none');
     $('#btnPublish').attr('disabled', false);
     $('#btnPublish .text').text('Publish');
-  }
+  };
 
-  function enableLoading() {
+  const enableLoading = () => {
     $('#spinner').removeClass('d-none');
     $('#btnPublish').attr('disabled', true);
     $('#btnPublish .text').text('Publishing...');
-  }
+  };
 
-  function capture() {
+  const capture = async () => {
     const imageCanvas = $('#capture').get(0);
-    html2canvas(imageCanvas).then(canvas => {
-      var dataURL = canvas.toDataURL();
-      console.log('------------------------------------');
-      console.log(dataURL);
-      console.log('------------------------------------');
-    });
-  }
+    const canvas = await html2canvas(imageCanvas);
+    var dataURL = canvas.toDataURL();
+    console.log('------------------------------------');
+    console.log(dataURL);
+    console.log('------------------------------------');
+  };
 
   //init and events
-  $(function() {
+  $(() => {
     disableLoading();
 
-    $('#btnPublish').click(function() {
+    $('#btnPublish').click(() => {
       const csrf = $('#csrf').val();
       $.ajax({
         type: 'PATCH',
@@ -47,7 +46,7 @@
       });
     });
 
-    $('#btnConfirm').click(function() {
+    $('#btnConfirm').on('click', () => {
       $('#confirmDialog').modal('show');
     });
   });
