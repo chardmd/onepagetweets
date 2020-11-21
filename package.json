@@ -34,6 +34,7 @@
     "bootstrap": "^4.5.3",
     "chalk": "^3.0.0",
     "clipboard": "^2.0.6",
+    "cloudinary": "^1.23.0",
     "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
