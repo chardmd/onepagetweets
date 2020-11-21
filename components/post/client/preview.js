@@ -11,6 +11,16 @@
     $('#btnPublish .text').text('Publishing...');
   }
 
+  function capture() {
+    const imageCanvas = $('#capture').get(0);
+    html2canvas(imageCanvas).then(canvas => {
+      var dataURL = canvas.toDataURL();
+      console.log('------------------------------------');
+      console.log(dataURL);
+      console.log('------------------------------------');
+    });
+  }
+
   //init and events
   $(function() {
     disableLoading();
@@ -28,7 +38,8 @@
         },
         success() {
           $('#confirmDialog').modal('hide');
-          Turbolinks.visit(`/post/success`);
+          capture();
+          //Turbolinks.visit(`/post/success`);
         },
         error() {
           Turbolinks.visit(`/post/preview`);
