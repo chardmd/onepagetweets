@@ -14,8 +14,8 @@
   const capture = async () => {
     const imageCanvas = $('#capture').get(0);
     const canvas = await html2canvas(imageCanvas);
-    var dataURL = canvas.toDataURL();
-    await uploadToServer(dataURL);
+    const base64Canvas = canvas.toDataURL('image/jpeg').split(';base64,')[1];
+    await uploadToServer(base64Canvas);
   };
 
   const uploadToServer = async canvasData => {

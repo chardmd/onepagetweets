@@ -33,8 +33,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new TwitterStrategy(
     {
-      consumerKey: process.env.TWITTER_KEY,
-      consumerSecret: process.env.TWITTER_SECRET,
+      consumerKey: process.env.TWITTER_API_KEY,
+      consumerSecret: process.env.TWITTER_API_SECRET,
       callbackURL: `${process.env.BASE_URL}/auth/twitter/callback`,
       passReqToCallback: true
     },

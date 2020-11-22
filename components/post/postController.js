@@ -1,5 +1,6 @@
 const validator = require('validator');
 const PostDAL = require('./postDAL');
+const PostService = require('./postService');
 
 /**
  * GET /post/about
@@ -108,9 +109,9 @@ exports.postAbout = async (req, res) => {
 exports.publish = async (req, res) => {
   const { user, body } = req;
   const { screenshot } = body;
-  console.log('------------------------------------');
-  console.log(screenshot);
-  console.log('------------------------------------');
+
+  await PostService.uploadToTwitter(screenshot);
+
   const project = await PostDAL.getProjectByUserId(user.id);
   if (!project.isPublished) {
     await PostDAL.updateProjectByUserId({

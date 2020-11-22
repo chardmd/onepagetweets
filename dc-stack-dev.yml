@@ -1,7 +1,7 @@
 #  This should run on any environment:
 #       Docker version: 18.06.1
 #       Docker-compose 1.17.1
-version: "3.7"
+version: '3.7'
 services:
   web:
     build: .
@@ -14,19 +14,19 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8080
-      BASE_URL: "${BASE_URL}"
-      HOME_PAGE_URL: "${HOME_PAGE_URL}"
-      MONGODB_URI: "${MONGODB_URI}"
-      SESSION_SECRET: "${SESSION_SECRET}"
-      TWITTER_KEY: "${TWITTER_KEY}"
-      TWITTER_SECRET: "${TWITTER_SECRET}"
-      SENTRY_DSN: "${SENTRY_DSN}"
+      BASE_URL: '${BASE_URL}'
+      HOME_PAGE_URL: '${HOME_PAGE_URL}'
+      MONGODB_URI: '${MONGODB_URI}'
+      SESSION_SECRET: '${SESSION_SECRET}'
+      TWITTER_API_KEY: '${TWITTER_API_KEY}'
+      TWITTER_API_SECRET: '${TWITTER_API_SECRET}'
+      SENTRY_DSN: '${SENTRY_DSN}'
     volumes:
-    - .:/home/node/app
-    - /home/node/app/node_modules
+      - .:/home/node/app
+      - /home/node/app/node_modules
 
   proxy:
-    build: 
+    build:
       context: ./nginx-conf
       dockerfile: Dockerfile-default
     image: chardmd/tweets-proxy

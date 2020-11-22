@@ -1,4 +1,4 @@
-# 
+#
 #  This is used for serving the app via HTTPS
 #
 #  Tested on the following environment:
@@ -6,32 +6,32 @@
 #       Ubuntu Ubuntu 18.04
 #       Docker-compose 1.17.1
 #
-version: "3.7"
+version: '3.7'
 services:
   web:
     image: onepagetweets/images:tweets-web-${CF_BRANCH_TAG_NORMALIZED}-${CF_SHORT_REVISION}
     networks:
       - tweets-network
     ports:
-      - "8080:8080"
+      - '8080:8080'
     deploy:
       replicas: 2
       restart_policy:
         max_attempts: 3
-        condition: on-failure   
+        condition: on-failure
       update_config:
         parallelism: 1
         delay: 5s
     environment:
       NODE_ENV: production
       PORT: 8080
-      BASE_URL: "${BASE_URL}"
-      HOME_PAGE_URL: "${HOME_PAGE_URL}"
-      MONGODB_URI: "${MONGODB_URI}"
-      SESSION_SECRET: "${SESSION_SECRET}"
-      TWITTER_KEY: "${TWITTER_KEY}"
-      TWITTER_SECRET: "${TWITTER_SECRET}"
-      SENTRY_DSN: "${SENTRY_DSN}"
+      BASE_URL: '${BASE_URL}'
+      HOME_PAGE_URL: '${HOME_PAGE_URL}'
+      MONGODB_URI: '${MONGODB_URI}'
+      SESSION_SECRET: '${SESSION_SECRET}'
+      TWITTER_API_KEY: '${TWITTER_API_KEY}'
+      TWITTER_API_SECRET: '${TWITTER_API_SECRET}'
+      SENTRY_DSN: '${SENTRY_DSN}'
   proxy:
     image: onepagetweets/images:tweets-proxy-${CF_BRANCH_TAG_NORMALIZED}-${CF_SHORT_REVISION}
     networks:
@@ -40,8 +40,8 @@ services:
       placement:
         constraints: [node.role == manager]
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/ssl/dhparam:/etc/ssl/dhparam
