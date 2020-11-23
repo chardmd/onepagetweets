@@ -47,8 +47,8 @@
   $(() => {
     disableLoading();
 
-    $('#btnPublish').click(async () => {
-      await capture();
+    $('#btnPublish').on('click', () => {
+      capture();
     });
 
     $('#btnConfirm').on('click', () => {
