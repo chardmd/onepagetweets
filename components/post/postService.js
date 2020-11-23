@@ -1,38 +1,30 @@
 const Twitter = require('twitter-lite');
 
+const newClient = ({ subdomain = 'api', accessToken, tokenSecret }) => {
+  return new Twitter({
+    subdomain,
+    consumer_key: process.env.TWITTER_API_KEY,
+    consumer_secret: process.env.TWITTER_API_SECRET,
+    access_token_key: accessToken,
+    access_token_secret: tokenSecret
+  });
+};
+
 const uploadToTwitter = async (user, b64content) => {
   const { tokens } = user;
   const twitterToken = tokens.find(i => i.kind === 'twitter');
-  const uploadClient = new Twitter({
+  const { accessToken, tokenSecret } = twitterToken;
+  const uploadClient = newClient({
     subdomain: 'upload',
-    consumer_key: process.env.TWITTER_API_KEY,
-    consumer_secret: process.env.TWITTER_API_SECRET,
-    access_token_key: twitterToken.accessToken,
-    access_token_secret: twitterToken.tokenSecret
+    accessToken,
+    tokenSecret
   });
-
-  const client = new Twitter({
-    subdomain: 'api',
-    consumer_key: process.env.TWITTER_API_KEY,
-    consumer_secret: process.env.TWITTER_API_SECRET,
-    access_token_key: twitterToken.accessToken,
-    access_token_secret: twitterToken.tokenSecret
-  });
-
   const result = await uploadClient.post('media/upload', {
     media: b64content
   });
-  var mediaIdStr = result.media_id_string;
-  var altText = 'Small flowers in a planter on a sunny balcony, blossoming.';
-  await uploadClient.post('media/metadata/create', {
-    media_id: mediaIdStr,
-    alt_text: { text: altText }
-  });
-  const params = {
-    status: 'loving life #nofilter',
-    media_ids: [mediaIdStr]
-  };
-  await client.post('statuses/update', params);
+  const mediaIdStr = result.media_id_string;
+  const apiClient = newClient({ accessToken, tokenSecret });
+  await apiClient.post('statuses/update', { media_ids: [mediaIdStr] });
 };
 
 module.exports = {
