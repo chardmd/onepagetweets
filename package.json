@@ -58,7 +58,7 @@
     "popper.js": "^1.16.1",
     "sharer.js": "^0.4.1",
     "turbolinks": "^5.2.0",
-    "twit": "^2.2.11",
+    "twitter-lite": "^0.14.0",
     "validator": "^12.2.0"
   },
   "devDependencies": {

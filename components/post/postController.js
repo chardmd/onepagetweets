@@ -110,7 +110,7 @@ exports.publish = async (req, res) => {
   const { user, body } = req;
   const { screenshot } = body;
 
-  await PostService.uploadToTwitter(screenshot);
+  await PostService.uploadToTwitter(user, screenshot);
 
   const project = await PostDAL.getProjectByUserId(user.id);
   if (!project.isPublished) {
