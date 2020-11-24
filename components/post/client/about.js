@@ -41,6 +41,11 @@
 
   //init and events
   $(() => {
+    tinymce.init({
+      selector: '#summary',
+      branding: false
+    });
+
     //on input press
     $('#summary').on('keyup', () => {
       let text = $('#summary').val();
