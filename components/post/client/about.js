@@ -43,7 +43,9 @@
   $(() => {
     tinymce.init({
       selector: '#summary',
-      branding: false
+      branding: false,
+      resize: false,
+      height: 400
     });
 
     //on input press
