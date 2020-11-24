@@ -1,6 +1,7 @@
 const validator = require('validator');
 const PostDAL = require('./postDAL');
 const PostService = require('./postService');
+const Project = require('../../models/Project');
 
 /**
  * GET /post/about
@@ -112,12 +113,12 @@ exports.publish = async (req, res) => {
 
   const postId = await PostService.uploadToTwitter(user, screenshot);
 
-  await PostDAL.updateProjectByUserId({
-    userId: user.id,
-    fields: {
-      postIds: [postId]
-    }
-  });
+  await Project.findOneAndUpdate(
+    {
+      user: user.id
+    },
+    { $push: { postIds: postId } }
+  );
 
   const project = await PostDAL.getProjectByUserId(user.id);
   if (!project.isPublished) {
