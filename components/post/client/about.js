@@ -41,6 +41,7 @@
 
   //init and events
   $(() => {
+    tinymce.remove();
     tinymce.init({
       selector: '#summary',
       branding: false,
