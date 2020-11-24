@@ -24,7 +24,10 @@ const uploadToTwitter = async (user, b64content) => {
   });
   const mediaIdStr = result.media_id_string;
   const apiClient = newClient({ accessToken, tokenSecret });
-  await apiClient.post('statuses/update', { media_ids: [mediaIdStr] });
+  const { id_str } = await apiClient.post('statuses/update', {
+    media_ids: [mediaIdStr]
+  });
+  return id_str;
 };
 
 module.exports = {
