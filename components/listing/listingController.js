@@ -1,5 +1,6 @@
 const ListingDAL = require('./listingDAL');
 const ListingService = require('./listingService');
+
 /**
  * GET /
  */
@@ -11,11 +12,6 @@ exports.getHome = async (req, res) => {
       user,
       project.postIds
     );
-
-    const urlList = twitterPost.map(post => {
-      return `https://twitter.com/${post.user.screen_name}/status/${post.id_str}`;
-    });
-
     res.render('listing/client/home', {
       title: 'Home',
       twitterPost,
