@@ -1,7 +1,8 @@
 const Project = require('../../models/Project');
 const User = require('../../models/User');
 
-exports.getProjectByUserId = async userId => Project.findOne({ user: userId });
+exports.getProjectByUserId = async userId =>
+  await Project.findOne({ user: userId }).lean();
 
 exports.getProjectByUserName = async username => {
   const user = await User.findOne({ 'profile.username': username });
