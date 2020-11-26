@@ -19,16 +19,6 @@ const getTwitterPost = async (user, postIds) => {
   let ids = postIds.reduce((acc, item) => acc.concat(item).concat(','), '');
   ids = ids.substring(0, ids.length - 1);
   const result = await apiClient.get('statuses/lookup', { id: ids });
-
-  await Project.findOneAndUpdate(
-    {
-      user: user.id
-    },
-    { postIds: result.map((i) => i.id_str) },
-    {
-      upsert: true
-    }
-  );
   return result;
 };
 

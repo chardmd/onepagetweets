@@ -12,6 +12,8 @@ exports.getHome = async (req, res) => {
       user,
       project.postIds
     );
+    const postIds = result.map((i) => i.id_str);
+    await ListingDAL.updateProjectPostIds(user.id, postIds);
     res.render('listing/client/home', {
       title: 'Home',
       twitterPost,
