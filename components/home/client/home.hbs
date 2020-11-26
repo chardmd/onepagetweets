@@ -29,12 +29,19 @@
     <!-- display flash messages -->
     <br />
     {{#if projExist}}
-        <div class="bg-light">
+        <div>
+            <div class="d-flex flex-column text-left">
+                <h1 class="h3 mb-1 text-gray-800 mb-3">Click the button below to get started</h1>
+                <h1 class="display-5 text-dark"><a href="/post/about" class="btn btn-lg btn-primary shadow-sm">
+                        <i class="far fa-edit fa-sm text-white-50"></i> Draft a Tweet</a></h1>
+            </div>
+        </div>
+        <div class="mt-4">
             <div class="container">
                 <div class="row">
                     {{#each twitterPost}}
                         <div class="col-md-4">
-                            <div class="mb-4 shadow-sm">
+                            <div class="mb-4">
                                 <blockquote class="twitter-tweet">
                                     <a href="https://twitter.com/{{user.screen_name}}/status/{{id_str}}">&nbsp;</a>
                                 </blockquote>
@@ -42,25 +49,6 @@
                         </div>
                     {{/each}}
                 </div>
-            </div>
-        </div>
-        <div>
-            <div class="d-flex flex-column text-center">
-                <div class="mb-3">
-                    <img src='/images/hiker.png' alt="Generic placeholder image" />
-                </div>
-                <h1 class="h3 mb-1 text-gray-800 mb-3">You have an existing website</h1>
-                <p class="text-primary">
-                    <span>Current Status</span>
-                    {{#if isPublished}}
-                        <span class="badge badge-success">Published</span>
-                    {{else}}
-                        <span class="badge badge-secondary">Draft</span>
-                    {{/if}}
-                </p>
-                <p>Click the button below to update</p>
-                <h1 class="display-5 text-dark"><a href="/post/about" class="btn btn-lg btn-primary shadow-sm">
-                        <i class="far fa-edit fa-sm text-white-50"></i> Draft a Tweet</a></h1>
             </div>
         </div>
     {{else}}
