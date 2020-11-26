@@ -39,7 +39,7 @@ exports.getDetails = async (req, res) => {
   const { user } = req;
   const { username } = user.profile;
   const project = await PostDAL.getProjectByUserId(user.id);
-  res.render('listing/client/details', {
+  res.render('home/client/details', {
     title: 'Home',
     layout: 'basic',
     username,
