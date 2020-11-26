@@ -41,13 +41,11 @@
                 <div class="row">
                     {{#each twitterPost}}
                         <div class="col-md-4">
-                            <div class="mb-4">
-                                <blockquote class="twitter-tweet">
-                                    <a href="https://twitter.com/{{user.screen_name}}/status/{{id_str}}">
-                                        <div class="loading"></div>
-                                    </a>
-                                </blockquote>
-                            </div>
+                            <blockquote class="twitter-tweet">
+                                <a href="https://twitter.com/{{user.screen_name}}/status/{{id_str}}">
+                                    <div class="loading"></div>
+                                </a>
+                            </blockquote>
                         </div>
                     {{/each}}
                 </div>
