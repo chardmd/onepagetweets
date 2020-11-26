@@ -33,28 +33,3 @@ exports.getHome = async (req, res) => {
     });
   }
 };
-
-/**
- * GET /:username
- */
-exports.getDetails = async (req, res) => {
-  const { params } = req;
-
-  const { username } = params;
-  const project = await HomeDAL.getProjectByUserName(username);
-
-  if (project) {
-    res.render('home/client/details', {
-      title: 'Home',
-      layout: 'basic',
-      username,
-      summary: project !== null ? project.summary : '',
-      baseUrl: process.env.BASE_URL
-    });
-  } else {
-    res.render('home/client/404', {
-      title: 'Not Found',
-      baseUrl: process.env.BASE_URL
-    });
-  }
-};

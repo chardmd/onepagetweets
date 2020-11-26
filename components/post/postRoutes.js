@@ -21,12 +21,6 @@ post.get(
   postController.getSuccess
 );
 
-post.get(
-  '/post/:username',
-  middlewareUtil.isAuthenticated,
-  postController.getDetails
-);
-
 /** POST */
 post.post(
   '/post/about',

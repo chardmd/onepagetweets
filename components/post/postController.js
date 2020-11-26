@@ -33,26 +33,6 @@ exports.getPreview = async (req, res) => {
 };
 
 /**
- * GET /post/:username
- */
-exports.getDetails = async (req, res) => {
-  const { user } = req;
-  const { username } = user.profile;
-  const project = await PostDAL.getProjectByUserId(user.id);
-  res.render('home/client/details', {
-    title: 'Home',
-    layout: 'basic',
-    username,
-    preview: true,
-    headline: project !== null ? project.headline : '',
-    fullName: project !== null ? project.fullName : '',
-    summary: project !== null ? project.summary : '',
-    techStack: project !== null ? project.techStack : [],
-    baseUrl: process.env.BASE_URL
-  });
-};
-
-/**
  * GET /post/success
  */
 exports.getSuccess = async (req, res) => {
