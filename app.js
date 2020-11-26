@@ -63,7 +63,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log(
     '%s MongoDB connection error. Please make sure MongoDB is running.',
@@ -82,6 +82,8 @@ app.set('views', path.join(__dirname, 'components'));
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.use(compression());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb' }));
 app.use(
   sass({
     src: path.join(__dirname, 'public'),
