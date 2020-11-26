@@ -83,7 +83,6 @@ app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.use(compression());
 app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb' }));
 app.use(
   sass({
     src: path.join(__dirname, 'public'),
