@@ -26,7 +26,7 @@
         _csrf: csrf,
         screenshot: canvasData
       },
-      url: `/editor/publish`,
+      url: `/draft/publish`,
       beforeSend() {
         enableLoading();
       },
@@ -35,10 +35,10 @@
         capture();
       },
       complete() {
-        Turbolinks.visit(`/editor/success`);
+        Turbolinks.visit(`/draft/success`);
       },
       error() {
-        Turbolinks.visit(`/editor/preview`);
+        Turbolinks.visit(`/draft/preview`);
       }
     });
   };
