@@ -4,25 +4,25 @@ const DraftService = require('./draftService');
 const Project = require('../../models/Project');
 
 /**
- * GET /post/about
+ * GET /draft/about
  */
 exports.getAbout = async (req, res) => {
   const { user } = req;
   const project = await DraftDAL.getProjectByUserId(user.id);
-  res.render('post/client/about', {
+  res.render('draft/client/about', {
     title: 'About Info',
     summary: project !== null ? project.summary : ''
   });
 };
 
 /**
- * GET /post/preview
+ * GET /draft/preview
  */
 exports.getPreview = async (req, res) => {
   const { user } = req;
   const { username } = user.profile;
   const project = await DraftDAL.getProjectByUserId(user.id);
-  res.render('post/client/preview', {
+  res.render('draft/client/preview', {
     title: 'Preview Website',
     username,
     headline: project !== null ? project.headline : '',
@@ -33,12 +33,12 @@ exports.getPreview = async (req, res) => {
 };
 
 /**
- * GET /post/success
+ * GET /draft/success
  */
 exports.getSuccess = async (req, res) => {
   const { user } = req;
   const { username } = user.profile;
-  res.render('post/client/success', {
+  res.render('draft/client/success', {
     title: 'Success',
     username,
     baseUrl: process.env.BASE_URL
@@ -46,7 +46,7 @@ exports.getSuccess = async (req, res) => {
 };
 
 /**
- * POST /post/about
+ * POST /draft/about
  */
 exports.postAbout = async (req, res) => {
   const { summary = '' } = req.body;
@@ -61,7 +61,7 @@ exports.postAbout = async (req, res) => {
   }
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect(`/post/about`);
+    return res.redirect(`/draft/about`);
   }
 
   try {
@@ -78,14 +78,14 @@ exports.postAbout = async (req, res) => {
       msg: 'Error creating project. Please try again.'
     });
     req.flash('errors', validationErrors);
-    return res.redirect(`/post/about`);
+    return res.redirect(`/draft/about`);
   }
 
   return res.status(200).json({ msg: 'success' });
 };
 
 /**
- * PATCH /post/publish
+ * PATCH /draft/publish
  */
 exports.publish = async (req, res) => {
   const { user, body } = req;

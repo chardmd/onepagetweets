@@ -4,7 +4,7 @@ const routes = require('express').Router();
  * Route handlers
  */
 const auth = require('../auth/authRoutes');
-const draft = require('../post/draftRoutes');
+const draft = require('../draft/draftRoutes');
 const home = require('../home/homeRoutes');
 const account = require('../account/accountRoutes');
 const admin = require('../admin/adminRoutes');
