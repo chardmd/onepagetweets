@@ -1,38 +1,38 @@
-const post = require('express').Router();
-const postController = require('./postController');
+const draft = require('express').Router();
+const draftController = require('./draftController');
 const middlewareUtil = require('../utils/middleware');
 
 /**
  * GET
  */
-post.get(
+draft.get(
   '/post/about',
   middlewareUtil.isAuthenticated,
-  postController.getAbout
+  draftController.getAbout
 );
-post.get(
+draft.get(
   '/post/preview',
   middlewareUtil.isAuthenticated,
-  postController.getPreview
+  draftController.getPreview
 );
-post.get(
+draft.get(
   '/post/success',
   middlewareUtil.isAuthenticated,
-  postController.getSuccess
+  draftController.getSuccess
 );
 
 /** POST */
-post.post(
+draft.post(
   '/post/about',
   middlewareUtil.isAuthenticated,
-  postController.postAbout
+  draftController.postAbout
 );
 
 /** PATCH */
-post.post(
+draft.post(
   '/post/publish',
   middlewareUtil.isAuthenticated,
-  postController.publish
+  draftController.publish
 );
 
-module.exports = post;
+module.exports = draft;

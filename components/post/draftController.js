@@ -1,6 +1,6 @@
 const validator = require('validator');
-const PostDAL = require('./postDAL');
-const PostService = require('./postService');
+const PostDAL = require('./draftDAL');
+const PostService = require('./draftService');
 const Project = require('../../models/Project');
 
 /**
