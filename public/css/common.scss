@@ -5,7 +5,8 @@ html {
 }
 
 body {
-    padding-top: 80px;
+    padding-top: 110px;
+    /** https://stackoverflow.com/questions/14735274/bootstrap-css-hides-portion-of-container-below-navbar-navbar-fixed-top **/
     margin-bottom: 75px;
     font-size: 14px;
 }
