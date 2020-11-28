@@ -6,31 +6,31 @@ const middlewareUtil = require('../utils/middleware');
  * GET
  */
 draft.get(
-  '/post/about',
+  '/draft/editor',
   middlewareUtil.isAuthenticated,
-  draftController.getAbout
+  draftController.getEditor
 );
 draft.get(
-  '/post/preview',
+  '/draft/preview',
   middlewareUtil.isAuthenticated,
   draftController.getPreview
 );
 draft.get(
-  '/post/success',
+  '/draft/success',
   middlewareUtil.isAuthenticated,
   draftController.getSuccess
 );
 
 /** POST */
 draft.post(
-  '/post/about',
+  '/draft/editor',
   middlewareUtil.isAuthenticated,
-  draftController.postAbout
+  draftController.postEditor
 );
 
 /** PATCH */
 draft.post(
-  '/post/publish',
+  '/draft/publish',
   middlewareUtil.isAuthenticated,
   draftController.publish
 );

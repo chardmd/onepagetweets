@@ -1,12 +1,12 @@
 {{#section 'scripts'}}
-    <script type="application/javascript" defer src="/js/pages/about.js"></script>
+    <script type="application/javascript" defer src="/js/pages/editor.js"></script>
 {{/section}}
 <div class="page">
     <ul class="nav nav-pills nav-justified form-tabs mb-4">
         <li class="nav-item">
             <a href="#" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 active">
                 <i class="mdi fas fa-info-circle mr-1"></i>
-                <span class="d-none d-sm-inline">About</span>
+                <span class="d-none d-sm-inline">Editor</span>
             </a>
         </li>
         <li class="nav-item">
@@ -22,10 +22,10 @@
             <!-- display flash messages -->
             {{> flash}}
             <!-- display flash messages -->
-            <input type="hidden" id="csrf" name="_csrf" value="{{_csrf}}" />
             <div class="card border-0">
                 <div class="card-body">
-                    <form id="aboutForm" class="form" method="POST">
+                    <form id="editorForm" class="form" method="POST">
+                        <input type="hidden" id="csrf" name="_csrf" value="{{_csrf}}" />
                         <input type="hidden" id="slugName" name="slugName" value="{{slugName}}" />
                         <input type="hidden" id="projectId" name="projectId" value="{{projectId}}" />
                         <div class="form-group">

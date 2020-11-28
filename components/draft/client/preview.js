@@ -18,7 +18,7 @@
     await uploadToServer(base64Canvas);
   };
 
-  const uploadToServer = async canvasData => {
+  const uploadToServer = async (canvasData) => {
     const csrf = $('#csrf').val();
     $.ajax({
       type: 'POST',
@@ -26,7 +26,7 @@
         _csrf: csrf,
         screenshot: canvasData
       },
-      url: `/post/publish`,
+      url: `/editor/publish`,
       beforeSend() {
         enableLoading();
       },
@@ -35,10 +35,10 @@
         capture();
       },
       complete() {
-        Turbolinks.visit(`/post/success`);
+        Turbolinks.visit(`/editor/success`);
       },
       error() {
-        Turbolinks.visit(`/post/preview`);
+        Turbolinks.visit(`/editor/preview`);
       }
     });
   };

@@ -14,23 +14,23 @@
   const submitForm = () => {
     $.ajax({
       type: 'POST',
-      url: '/post/about',
-      data: $('#aboutForm').serialize(),
+      url: '/draft/editor',
+      data: $('#editorForm').serialize(),
       beforeSend() {
         enableLoading();
       },
       success() {
         disabledLoading();
-        Turbolinks.visit(`/post/preview`);
+        Turbolinks.visit(`/draft/preview`);
       },
       error(err) {
         console.log(err);
-        Turbolinks.visit(`/post/about`);
+        Turbolinks.visit(`/draft/editor`);
       }
     });
   };
 
-  const setButtonActive = text => {
+  const setButtonActive = (text) => {
     let empty = text.length == 0;
     if (empty) {
       $('#buttonNext').attr('disabled', true);
@@ -56,7 +56,7 @@
     });
 
     //submit form
-    $('#aboutForm').on('submit', e => {
+    $('#editorForm').on('submit', (e) => {
       e.preventDefault();
       submitForm();
     });

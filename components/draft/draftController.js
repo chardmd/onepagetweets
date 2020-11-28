@@ -4,13 +4,13 @@ const DraftService = require('./draftService');
 const Project = require('../../models/Project');
 
 /**
- * GET /draft/about
+ * GET /draft/editor
  */
-exports.getAbout = async (req, res) => {
+exports.getEditor = async (req, res) => {
   const { user } = req;
   const project = await DraftDAL.getProjectByUserId(user.id);
-  res.render('draft/client/about', {
-    title: 'About Info',
+  res.render('draft/client/editor', {
+    title: 'Editor',
     summary: project !== null ? project.summary : ''
   });
 };
@@ -46,9 +46,9 @@ exports.getSuccess = async (req, res) => {
 };
 
 /**
- * POST /draft/about
+ * POST /draft/editor
  */
-exports.postAbout = async (req, res) => {
+exports.postEditor = async (req, res) => {
   const { summary = '' } = req.body;
 
   const { user } = req;
@@ -61,7 +61,7 @@ exports.postAbout = async (req, res) => {
   }
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect(`/draft/about`);
+    return res.redirect(`/draft/editor`);
   }
 
   try {
@@ -78,7 +78,7 @@ exports.postAbout = async (req, res) => {
       msg: 'Error creating project. Please try again.'
     });
     req.flash('errors', validationErrors);
-    return res.redirect(`/draft/about`);
+    return res.redirect(`/draft/editor`);
   }
 
   return res.status(200).json({ msg: 'success' });
