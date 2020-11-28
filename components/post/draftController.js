@@ -1,6 +1,6 @@
 const validator = require('validator');
-const PostDAL = require('./draftDAL');
-const PostService = require('./draftService');
+const DraftDAL = require('./draftDAL');
+const DraftService = require('./draftService');
 const Project = require('../../models/Project');
 
 /**
@@ -8,7 +8,7 @@ const Project = require('../../models/Project');
  */
 exports.getAbout = async (req, res) => {
   const { user } = req;
-  const project = await PostDAL.getProjectByUserId(user.id);
+  const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('post/client/about', {
     title: 'About Info',
     summary: project !== null ? project.summary : ''
@@ -21,7 +21,7 @@ exports.getAbout = async (req, res) => {
 exports.getPreview = async (req, res) => {
   const { user } = req;
   const { username } = user.profile;
-  const project = await PostDAL.getProjectByUserId(user.id);
+  const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('post/client/preview', {
     title: 'Preview Website',
     username,
@@ -65,7 +65,7 @@ exports.postAbout = async (req, res) => {
   }
 
   try {
-    await PostDAL.updateProjectByUserId({
+    await DraftDAL.updateProjectByUserId({
       userId: user.id,
       fields: {
         summary,
@@ -91,7 +91,7 @@ exports.publish = async (req, res) => {
   const { user, body } = req;
   const { screenshot } = body;
 
-  const postId = await PostService.uploadToTwitter(user, screenshot);
+  const postId = await DraftService.uploadToTwitter(user, screenshot);
 
   await Project.findOneAndUpdate(
     {
@@ -100,9 +100,9 @@ exports.publish = async (req, res) => {
     { $push: { postIds: postId } }
   );
 
-  const project = await PostDAL.getProjectByUserId(user.id);
+  const project = await DraftDAL.getProjectByUserId(user.id);
   if (!project.isPublished) {
-    await PostDAL.updateProjectByUserId({
+    await DraftDAL.updateProjectByUserId({
       userId: user.id,
       fields: {
         isPublished: true
