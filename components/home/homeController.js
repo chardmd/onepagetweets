@@ -29,7 +29,7 @@ exports.getHome = async (req, res) => {
       layout: 'basic',
       username: u,
       sampleAccounts: HomeConstants.sampleAccounts,
-      displayFooter: true,
+      displayFooter: false,
       baseUrl: process.env.BASE_URL
     });
   }
