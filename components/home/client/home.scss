@@ -1,27 +1,12 @@
-/** Home page css **/
-.home-page {
-    .buttonLink a {
-        text-decoration: none;
-    }
-
-    .buttonLink:hover,
-    :focus {
-        a {
-            color: white;
-        }
-    }
-
-    .badge {
-        font-size: 14px;
-    }
-
-    .loading {
+/** home css **/
+.custom--home {
+    .custom--loading {
         display: flex;
         justify-content: center;
         margin: 2rem;
     }
 
-    .loading::after {
+    .custom--loading::after {
         content: "";
         width: 70px;
         height: 70px;
@@ -33,7 +18,7 @@
         animation: spin 0.8s 0.1s ease-in-out infinite both;
     }
 
-    .masthead {
+    .custom--masthead {
         position: relative;
         padding: 3rem 15px;
         background: linear-gradient(to right bottom, #f7f5fb 50%, #fff 50%);
@@ -41,33 +26,29 @@
 
 }
 
-.landing-page {
+.custom--landing {
 
-    h1 {
+    .custom--h1 {
         color: $gray-900;
     }
 
-    .landingLogo {
+    .custom--landingLogo {
         text-decoration: none;
         color: $black;
     }
 
-    h3 {
+    .custom--h3 {
         letter-spacing: 1px;
         color: $black;
     }
 
-    .text-desc {
-        color: $gray-700;
-    }
-
-    .twitter {
+    .custom--twitter {
         height: 60vh;
         overflow-y: scroll;
         text-align: center;
     }
 
-    .badge {
+    .custom--badge {
         padding: 5px 12px;
         font-size: 0.8125rem;
         margin: 5px 2px 2px 2px;

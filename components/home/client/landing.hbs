@@ -24,13 +24,13 @@
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script type="application/javascript" defer src="/js/pages/home/landing.js"></script>
 {{/section}}
-<div class="page landing-page">
+<div class="custom--landing">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-xl-6 offset-xl-1 order-2 mb-5 mb-md-0">
                 <div class="p-3 d-flex justify-content-center">
                     {{#if username}}
-                        <div class="col-sm twitter">
+                        <div class="col-sm custom--twitter">
                             <a class="twitter-timeline"
                                 href="https://twitter.com/{{username}}?ref_src=twsrc%5Etfw">Loading...</a>
                         </div>
@@ -42,12 +42,12 @@
             <div class="col-12 col-xl-5 order-xl-1 order-1 my-5">
                 <div class="text-center">
                     <h3 class="text-uppercase mb-4">
-                        <a href="/" class="landingLogo">
+                        <a href="/" class="custom--landingLogo">
                             <img class="img mt-1" src="/images/profile.png" width="100" height="100" />
                             One Page Tweets
                         </a>
                     </h3>
-                    <h1 class="display-5 mb-3">
+                    <h1 class="display-5 mb-3 custom--h1">
                         Design, and publish more words with Onepagetweets
                     </h1>
                     <p class="mb-4 text-desc">
@@ -56,7 +56,7 @@
                     <a class="btn btn-lg btn-primary mb-5 font-weight-bolder" style="font-size:1.5em;"
                         href="/auth/twitter"><i class='fab fa-twitter'></i> Sign in with Twitter</a>
                     <p class="badges">
-                        <a href="/" class="badge badge-pill
+                        <a href="/" class="badge badge-pill custom--badge
                                 {{#eq username undefined}}
                                     badge-primary
                                 {{else}}
@@ -65,7 +65,7 @@
                             Default
                         </a>
                         {{#each sampleAccounts}}
-                            <a href="/?u={{value}}" class="badge badge-pill
+                            <a href="/?u={{value}}" class="badge badge-pill custom--badge
                                 {{#eq ../username value}}
                                     badge-primary
                                 {{else}}
