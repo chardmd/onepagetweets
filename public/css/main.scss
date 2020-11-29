@@ -3,8 +3,7 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootswatch/dist/cosmo/bootswatch";
 
-@import "./common.scss";
-
 // components specific sass
+@import "components/app/client/app.scss";
 @import "components/draft/client/draft.scss";
 @import "components/home/client/home.scss";
