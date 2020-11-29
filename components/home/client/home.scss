@@ -33,6 +33,12 @@
         animation: spin 0.8s 0.1s ease-in-out infinite both;
     }
 
+    .masthead {
+        position: relative;
+        padding: 3rem 15px;
+        background: linear-gradient(to right bottom, #f7f5fb 50%, #fff 50%);
+    }
+
 }
 
 .landing-page {
