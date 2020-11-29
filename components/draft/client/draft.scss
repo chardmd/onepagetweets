@@ -1,25 +1,9 @@
-.home-page {
-    .limit-text {
-        line-height: 1.5em;
-        min-height: 3em;
-        max-height: 3em;
-        overflow: hidden;
-    }
-}
+/** draft css **/
+.custom--draft {}
 
-.page-preview {
+.custom--preview {
 
-    .row {
-        .col-sm {
-            padding: 0;
-        }
-    }
-
-    #btnPreview {
-        text-decoration: none;
-    }
-
-    .container {
+    .custom--wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -36,7 +20,7 @@
         }
     }
 
-    .about {
+    .custom--about {
         color: hsla(0, 0%, 0%, 0.8);
         font-family: sans-serif;
         font-weight: normal;
@@ -46,7 +30,11 @@
         margin: 0 0 0.5rem 0;
     }
 
-    #txtCopy {
+
+}
+
+.custom--success {
+    .custom--txtCopy {
         font-size: 26px;
     }
 }

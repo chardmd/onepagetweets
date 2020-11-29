@@ -3,7 +3,7 @@
     <script type="application/javascript" src="/js/lib/html2canvas.min.js"></script>
     <script type="application/javascript" defer src="/js/pages/preview.js"></script>
 {{/section}}
-<div class="page page-preview">
+<div class="custom--preview">
     <ul class="nav nav-pills nav-justified mb-4 form-tabs">
         <li class="nav-item">
             <a href="/draft/editor" class="nav-link rounded-0 pt-2 pb-2">
@@ -23,9 +23,9 @@
         <input type="hidden" name="_csrf" value="{{_csrf}}" id="csrf" />
         <div class="row">
             <div class="col-sm">
-                <div id="capture" class="container">
+                <div id="capture" class="custom--wrapper">
                     <div class="wrapper">
-                        <p class="about">{{{summary}}}</p>
+                        <p class="custom--about">{{{summary}}}</p>
                     </div>
                 </div>
             </div>
