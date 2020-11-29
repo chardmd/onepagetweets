@@ -4,8 +4,8 @@ const hbsHelpers = require('handlebars-helpers')();
 
 const hbs = exphbs.create({
   extname: '.hbs',
-  layoutsDir: 'components/app/layouts',
-  partialsDir: ['components/app/partials'],
+  layoutsDir: 'components/app/client/layouts',
+  partialsDir: ['components/app/client/partials'],
   helpers: {
     ...hbsHelpers,
     section: function section(name, options) {
