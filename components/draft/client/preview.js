@@ -2,7 +2,7 @@
   const disableLoading = () => {
     $('#spinner').addClass('d-none');
     $('#btnPublish').attr('disabled', false);
-    $('#btnPublish .text').text('Publish');
+    $('#btnPublish .text').text('Publish Tweet');
   };
 
   const enableLoading = () => {
