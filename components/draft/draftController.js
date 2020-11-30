@@ -11,7 +11,7 @@ exports.getEditor = async (req, res) => {
   const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('draft/client/editor', {
     title: 'Editor',
-    summary: project !== null ? project.summary : ''
+    content: project !== null ? project.content : ''
   });
 };
 
@@ -20,15 +20,10 @@ exports.getEditor = async (req, res) => {
  */
 exports.getPreview = async (req, res) => {
   const { user } = req;
-  const { username } = user.profile;
   const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('draft/client/preview', {
-    title: 'Preview Website',
-    username,
-    headline: project !== null ? project.headline : '',
-    fullName: project !== null ? project.fullName : '',
-    summary: project !== null ? project.summary : '',
-    techStack: project !== null ? project.techStack : []
+    title: 'Preview',
+    content: project !== null ? project.content : ''
   });
 };
 
@@ -49,14 +44,14 @@ exports.getSuccess = async (req, res) => {
  * POST /draft/editor
  */
 exports.postEditor = async (req, res) => {
-  const { summary = '' } = req.body;
+  const { content = '' } = req.body;
 
   const { user } = req;
 
   const validationErrors = [];
-  if (validator.isEmpty(summary)) {
+  if (validator.isEmpty(content)) {
     validationErrors.push({
-      msg: 'Please enter summary.'
+      msg: 'Please enter content.'
     });
   }
   if (validationErrors.length) {
@@ -68,7 +63,7 @@ exports.postEditor = async (req, res) => {
     await DraftDAL.updateProjectByUserId({
       userId: user.id,
       fields: {
-        summary,
+        content,
         isPublished: false
       }
     });

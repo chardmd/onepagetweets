@@ -1,7 +1,7 @@
 const Project = require('../../models/Project');
 
 exports.getProjectByUserId = async (userId) =>
-  Project.findOne({ user: userId });
+  Project.findOne({ user: userId }).lean();
 
 exports.updateProjectByUserId = async ({ userId, fields = {} }) => {
   const project = await Project.findOneAndUpdate(
@@ -12,6 +12,6 @@ exports.updateProjectByUserId = async ({ userId, fields = {} }) => {
     {
       upsert: true
     }
-  );
+  ).lean();
   return project;
 };

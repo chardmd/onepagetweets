@@ -2,7 +2,7 @@
     <link href="/js/lib/quill.snow.css" rel="stylesheet">
 {{/section}}
 {{#section 'scripts'}}
-    <script src="/js/lib/quill.js"></script>
+    <script src="/js/lib/quill.min.js"></script>
     <script type="application/javascript" defer src="/js/pages/editor.js"></script>
 {{/section}}
 <div class="custom--draft">
@@ -36,7 +36,7 @@
                             <p class="mb-4 font-weight-bold">
                                 What's Happening
                             </p>
-                            <textarea id="summary" class="form-control" name="summary">{{summary}}</textarea>
+                            <div id="editor" class="custom--editor">{{{content}}}</div>
                         </div>
                         <br />
                         <div class="form-group">

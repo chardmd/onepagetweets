@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const projectSchema = new Schema(
   {
-    summary: String,
+    content: String,
     postIds: {
       type: Array,
       default: []

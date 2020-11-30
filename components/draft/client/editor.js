@@ -11,11 +11,15 @@
     $('#buttonNext .text').text('Saving...');
   };
 
-  const submitForm = () => {
+  const submitForm = (content) => {
+    const csrf = $('#csrf').val();
     $.ajax({
       type: 'POST',
       url: '/draft/editor',
-      data: $('#editorForm').serialize(),
+      data: {
+        _csrf: csrf,
+        content: content
+      },
       beforeSend() {
         enableLoading();
       },
@@ -41,20 +45,19 @@
 
   //init and events
   $(() => {
-    new Quill('#summary', {
+    const editor = new Quill('#editor', {
       theme: 'snow'
     });
 
     //on input press
-    $('#summary').on('keyup', () => {
-      let text = $('#summary').val();
-      setButtonActive(text);
+    $('#editor').on('keyup', () => {
+      setButtonActive(editor.root.innerHTML);
     });
 
     //submit form
     $('#editorForm').on('submit', (e) => {
       e.preventDefault();
-      submitForm();
+      submitForm(editor.root.innerHTML);
     });
   });
 })();

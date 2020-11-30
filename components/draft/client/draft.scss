@@ -1,5 +1,9 @@
 /** draft css **/
-.custom--draft {}
+.custom--draft {
+    .custom--editor {
+        height: 450px;
+    }
+}
 
 /** preview css **/
 .custom--preview {
@@ -8,7 +12,7 @@
         height: 100%;
         overflow: hidden;
         background-color: #eff6fb;
-        min-height: 500px;
+        min-height: 450px;
 
         @media (max-width: 800px) {
             padding: 0;
@@ -35,4 +39,8 @@
     .custom--txtCopy {
         font-size: 26px;
     }
+}
+
+.ql-editor {
+    min-height: 400px;
 }
