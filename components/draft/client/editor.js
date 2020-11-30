@@ -42,7 +42,6 @@
   //init and events
   $(() => {
     new Quill('#summary', {
-      modules: { toolbar: '#toolbar' },
       theme: 'snow'
     });
 
