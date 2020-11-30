@@ -41,12 +41,9 @@
 
   //init and events
   $(() => {
-    tinymce.remove();
-    tinymce.init({
-      selector: '#summary',
-      branding: false,
-      resize: false,
-      height: 400
+    new Quill('#summary', {
+      modules: { toolbar: '#toolbar' },
+      theme: 'snow'
     });
 
     //on input press

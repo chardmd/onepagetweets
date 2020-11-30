@@ -11,7 +11,7 @@ const librariesPath = [
   'node_modules/clipboard/dist',
   'node_modules/html2canvas/dist',
   'node_modules/@fortawesome/fontawesome-free',
-  'node_modules/tinymce'
+  'node_modules/quill/dist'
 ];
 
 const jsLibraries = librariesPath.map((value) =>

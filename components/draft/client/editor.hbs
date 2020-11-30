@@ -1,5 +1,8 @@
+{{#section 'head'}}
+    <link href="/js/lib/quill.snow.css" rel="stylesheet">
+{{/section}}
 {{#section 'scripts'}}
-    <script type="application/javascript" src="/js/lib/tinymce.min.js"></script>
+    <script src="/js/lib/quill.js"></script>
     <script type="application/javascript" defer src="/js/pages/editor.js"></script>
 {{/section}}
 <div class="custom--draft">
@@ -33,6 +36,10 @@
                             <p class="mb-4 font-weight-bold">
                                 What's Happening
                             </p>
+                            <div id="toolbar">
+                                <button class="ql-bold">Bold</button>
+                                <button class="ql-italic">Italic</button>
+                            </div>
                             <textarea id="summary" class="form-control" name="summary">{{summary}}</textarea>
                         </div>
                         <br />
