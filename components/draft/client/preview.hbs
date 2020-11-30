@@ -1,3 +1,6 @@
+{{#section 'head'}}
+    <link href="/js/lib/quill.core.css" rel="stylesheet">
+{{/section}}
 {{#section 'scripts'}}
     <!--html2canvas -->
     <script type="application/javascript" src="/js/lib/html2canvas.min.js"></script>
@@ -23,10 +26,8 @@
         <input type="hidden" name="_csrf" value="{{_csrf}}" id="csrf" />
         <div class="row">
             <div class="col-sm">
-                <div id="capture" class="custom--wrapper">
-                    <div class="wrapper">
-                        <p class="custom--about">{{{content}}}</p>
-                    </div>
+                <div id="capture" class="ql-editor">
+                    {{{content}}}
                 </div>
             </div>
         </div>

@@ -2,36 +2,19 @@
 .custom--draft {
     .custom--editor {
         height: 450px;
+        width: 100%;
     }
 }
 
 /** preview css **/
 .custom--preview {
-    .custom--wrapper {
-        padding: 1rem;
-        height: 100%;
-        overflow: hidden;
+    .ql-editor {
+        min-height: 500px !important;
+        padding: 0 !important;
+        white-space: normal !important;
         background-color: #eff6fb;
-        min-height: 450px;
-
-        @media (max-width: 800px) {
-            padding: 0;
-            width: 100%;
-            text-align: center;
-        }
+        height: 600px !important;
     }
-
-    .custom--about {
-        color: hsla(0, 0%, 0%, 0.8);
-        font-family: sans-serif;
-        font-weight: normal;
-        word-wrap: break-word;
-        font-kerning: normal;
-        padding: 0;
-        margin: 0 0 0.5rem 0;
-    }
-
-
 }
 
 /** success css **/
@@ -39,8 +22,4 @@
     .custom--txtCopy {
         font-size: 26px;
     }
-}
-
-.ql-editor {
-    min-height: 400px;
 }
