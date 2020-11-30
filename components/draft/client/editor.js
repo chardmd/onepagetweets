@@ -35,7 +35,7 @@
   };
 
   const setButtonActive = (text) => {
-    let empty = text.length == 0;
+    let empty = text.trim().length == 0;
     if (empty) {
       $('#buttonNext').attr('disabled', true);
     } else {
@@ -45,7 +45,7 @@
 
   //init and events
   $(() => {
-    var toolbarOptions = [
+    const toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'], // toggled buttons
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
@@ -64,9 +64,13 @@
       theme: 'snow'
     });
 
+    const text = editor.getText();
+    setButtonActive(text);
+
     //on input press
     $('#editor').on('keyup', () => {
-      setButtonActive(editor.root.innerHTML);
+      const text = editor.getText();
+      setButtonActive(text);
     });
 
     //submit form
