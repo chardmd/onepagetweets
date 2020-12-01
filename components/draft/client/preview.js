@@ -1,4 +1,15 @@
 (() => {
+  //https://stackoverflow.com/questions/22329481/compressing-base64-data-uri-images
+  const U16to8 = (data) => {
+    var out = '';
+    for (var i = 0; i < data.length; i++) {
+      var charCode = data.charCodeAt(i);
+      out += String.fromCharCode(~~(charCode / 256));
+      out += String.fromCharCode(charCode % 256);
+    }
+    return out;
+  };
+
   const disableLoading = () => {
     $('#spinner').addClass('d-none');
     $('#btnPublish').attr('disabled', false);
@@ -20,11 +31,13 @@
 
   const uploadToServer = async (canvasData) => {
     const csrf = $('#csrf').val();
+    let compressed = LZString.compress(canvasData);
+    compressed = U16to8(compressed);
     $.ajax({
       type: 'POST',
       data: {
         _csrf: csrf,
-        screenshot: canvasData
+        compressed
       },
       url: `/draft/publish`,
       beforeSend() {

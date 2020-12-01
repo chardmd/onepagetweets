@@ -91,10 +91,12 @@ app.use(
   })
 );
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
   })
 );
 app.use(

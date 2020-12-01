@@ -12,7 +12,7 @@ const librariesPath = [
   'node_modules/html2canvas/dist',
   'node_modules/@fortawesome/fontawesome-free',
   'node_modules/quill/dist',
-  'node_modules/pako/dist'
+  'node_modules/lz-string/libs'
 ];
 
 const jsLibraries = librariesPath.map((value) =>

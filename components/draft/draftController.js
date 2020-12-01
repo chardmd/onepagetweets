@@ -97,10 +97,9 @@ exports.deleteDraft = async (req, res) => {
  */
 exports.publish = async (req, res) => {
   const { user, body } = req;
-  const { screenshot } = body;
-
-  const postId = await DraftService.uploadToTwitter(user, screenshot);
-
+  const { compressed } = body;
+  let base64 = DraftService.decompressPayload(compressed);
+  const postId = await DraftService.uploadToTwitter(user, base64);
   await Project.findOneAndUpdate(
     {
       user: user.id
