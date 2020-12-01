@@ -1,20 +1,20 @@
 const account = require('express').Router();
 const accountController = require('./accountController');
-const middlewareUtil = require('../utils/middleware');
+const middleware = require('../utils/middleware');
 
 account.get(
   '/account',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   accountController.getAccount
 );
 account.post(
   '/account/delete',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   accountController.postDeleteAccount
 );
 account.get(
   '/account/unlink/:provider',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   accountController.getOauthUnlink
 );
 

@@ -1,3 +1,5 @@
+const pako = require('pako');
+
 /**
  * Login Required middleware.
  */
@@ -16,4 +18,16 @@ exports.isAdmin = (req, res, next) => {
     }
   }
   res.redirect('/');
+};
+
+exports.parsePako = (req, res, next) => {
+  try {
+    const { body } = req;
+    if (typeof body === 'string') {
+      req.body = JSON.parse(pako.inflate(body, { to: 'string' }));
+    }
+  } catch (e) {
+    next(e);
+  }
+  next();
 };

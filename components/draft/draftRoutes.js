@@ -1,44 +1,45 @@
 const draft = require('express').Router();
 const draftController = require('./draftController');
-const middlewareUtil = require('../utils/middleware');
+const middleware = require('../utils/middleware');
 
 /**
  * GET
  */
 draft.get(
   '/draft/editor',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   draftController.getEditor
 );
 draft.get(
   '/draft/preview',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   draftController.getPreview
 );
 draft.get(
   '/draft/success',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   draftController.getSuccess
 );
 
 /** POST */
 draft.post(
   '/draft/editor',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   draftController.postEditor
 );
 
 /** PATCH */
 draft.post(
   '/draft/publish',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
+  //middleware.parsePako,
   draftController.publish
 );
 
 /** DELETE */
 draft.delete(
   '/draft/delete',
-  middlewareUtil.isAuthenticated,
+  middleware.isAuthenticated,
   draftController.deleteDraft
 );
 
