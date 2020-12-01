@@ -34,6 +34,26 @@
     });
   };
 
+  const deleteDraft = () => {
+    const isDeleted = confirm('Do you want to delete this draft?');
+    if (isDeleted) {
+      const csrf = $('#csrf').val();
+      $.ajax({
+        type: 'DELETE',
+        data: {
+          _csrf: csrf
+        },
+        url: `/draft/delete`,
+        success: function () {
+          Turbolinks.visit(`/draft/editor`);
+        },
+        error: function () {
+          Turbolinks.visit(`/draft/editor`);
+        }
+      });
+    }
+  };
+
   const setButtonActive = (text) => {
     let empty = text.trim().length == 0;
     if (empty) {
@@ -78,6 +98,10 @@
     $('#editorForm').on('submit', (e) => {
       e.preventDefault();
       submitForm(editor.root.innerHTML);
+    });
+
+    $('#discardButton').on('click', () => {
+      deleteDraft();
     });
   });
 })();

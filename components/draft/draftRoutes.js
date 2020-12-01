@@ -35,4 +35,11 @@ draft.post(
   draftController.publish
 );
 
+/** DELETE */
+draft.delete(
+  '/draft/delete',
+  middlewareUtil.isAuthenticated,
+  draftController.deleteDraft
+);
+
 module.exports = draft;

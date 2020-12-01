@@ -80,6 +80,16 @@ exports.postEditor = async (req, res) => {
 };
 
 /**
+ *
+ * Delete Unpublished Project
+ */
+exports.deleteDraft = async (req, res) => {
+  const { user } = req;
+  await DraftDAL.deleteProjectByUserId(user.id);
+  res.status(204).end();
+};
+
+/**
  * PATCH /draft/publish
  */
 exports.publish = async (req, res) => {
