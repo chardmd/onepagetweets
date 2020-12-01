@@ -12,7 +12,8 @@ exports.getHome = async (req, res) => {
     const twitterPost =
       project && (await HomeService.getTwitterPost(user, project.postIds));
     const twitterPostIds = twitterPost ? twitterPost.map((i) => i.id_str) : [];
-    await HomeDAL.updateProjectPostIds(user.id, twitterPostIds);
+    twitterPostIds.length !== 0 &&
+      (await HomeDAL.updateProjectPostIds(user.id, twitterPostIds));
     res.render('home/client/home', {
       title: 'Home',
       twitterPost,
