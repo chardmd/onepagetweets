@@ -17,4 +17,4 @@ exports.updateProjectByUserId = async ({ userId, fields = {} }) => {
 };
 
 exports.deleteProjectByUserId = async (userId) =>
-  Project.deleteOne({ user: userId, isPublished: false }).lean();
+  Project.deleteOne({ user: userId }).lean();
