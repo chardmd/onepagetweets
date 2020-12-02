@@ -14,11 +14,9 @@ exports.createProject = async (fields) => {
 };
 
 exports.updateProjectById = async ({ id, fields = {} }) => {
-  const project = await Project.findOneAndUpdate({ _id: id }, fields, {
-    upsert: true
-  }).lean();
+  const project = await Project.findOneAndUpdate({ _id: id }, fields).lean();
   return project;
 };
 
-exports.deleteProjectByUserId = async (userId) =>
-  Project.deleteOne({ user: userId }).lean();
+exports.deleteProjectByUserId = async (id) =>
+  Project.deleteOne({ _id: id }).lean();
