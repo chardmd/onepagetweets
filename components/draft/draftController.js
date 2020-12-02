@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const validator = require('validator');
 const DraftDAL = require('./draftDAL');
 const DraftService = require('./draftService');
@@ -47,8 +48,6 @@ exports.getSuccess = async (req, res) => {
 exports.postEditor = async (req, res) => {
   const { content = '' } = req.body;
 
-  const { user } = req;
-
   const validationErrors = [];
   if (validator.isEmpty(content)) {
     validationErrors.push({
@@ -61,13 +60,20 @@ exports.postEditor = async (req, res) => {
   }
 
   try {
-    await DraftDAL.updateProjectByUserId({
-      userId: user.id,
-      fields: {
-        content,
-        isPublished: false
-      }
-    });
+    const unpublishedProject = await DraftDAL.getProjectByUserId(req.user.id);
+    if (_.isNil(unpublishedProject)) {
+      await DraftDAL.createProject({
+        user: req.user.id,
+        content
+      });
+    } else {
+      await DraftDAL.updateProjectById({
+        id: unpublishedProject.id,
+        fields: {
+          content: content
+        }
+      });
+    }
   } catch (err) {
     console.log({ err });
     validationErrors.push({
@@ -85,10 +91,9 @@ exports.postEditor = async (req, res) => {
  * Delete Unpublished Project
  */
 exports.deleteDraft = async (req, res) => {
-  const { user } = req;
-  const project = await DraftDAL.getProjectByUserId(user.id);
+  const project = await DraftDAL.getProjectByUserId(req.user.id);
   if (!project.isPublished) {
-    await DraftDAL.deleteProjectByUserId(user.id);
+    await DraftDAL.deleteProjectByUserId(req.user.id);
   }
   res.status(204).end();
 };
@@ -100,11 +105,11 @@ exports.publish = async (req, res) => {
   const { user, body } = req;
   const { compressed } = body;
   let base64 = DraftService.decompressPayload(compressed);
-  const postId = await DraftService.uploadToTwitter(user, base64);
-  const project = await DraftDAL.getProjectByUserId(user.id);
-  if (!project.isPublished) {
-    await DraftDAL.updateProjectByUserId({
-      userId: user.id,
+  const unpublishedProject = await DraftDAL.getProjectByUserId(req.user.id);
+  if (!_.isNil(unpublishedProject) && !unpublishedProject.isPublished) {
+    const postId = await DraftService.uploadToTwitter(user, base64);
+    await DraftDAL.updateProjectById({
+      id: unpublishedProject._id,
       fields: {
         postId,
         isPublished: true

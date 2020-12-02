@@ -4,18 +4,19 @@ exports.getProjectByUserId = async (userId) =>
   Project.findOne({ user: userId, isPublished: false }).lean();
 
 exports.getLatestProject = async (userId) =>
-  Project.findOne({ user: userId }).sort({ createdAt: -1 }).lean();
+  Project.findOne({ user: userId, isPublished: true })
+    .sort({ createdAt: -1 })
+    .lean();
 
-exports.updateProjectByUserId = async ({ userId, fields = {} }) => {
-  const project = await Project.findOneAndUpdate(
-    {
-      user: userId
-    },
-    fields,
-    {
-      upsert: true
-    }
-  ).lean();
+exports.createProject = async (fields) => {
+  const project = await Project.create(fields);
+  return project;
+};
+
+exports.updateProjectById = async ({ id, fields = {} }) => {
+  const project = await Project.findOneAndUpdate({ _id: id }, fields, {
+    upsert: true
+  }).lean();
   return project;
 };
 
