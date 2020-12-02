@@ -115,7 +115,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-require('./components/account/passport'); // passport strategies
+require('./components/auth/passport'); // passport strategies
 
 app.use(flash());
 app.use((req, res, next) => {
@@ -130,17 +130,7 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 app.disable('x-powered-by');
 app.use(async (req, res, next) => {
-  // store user
-  if (req.user) {
-    const user = {
-      id: req.user.id,
-      email: req.user.email,
-      profile: req.user.profile,
-      isAdmin: req.user.isAdmin,
-      twitter: req.user.twitter
-    };
-    res.locals.user = user;
-  }
+  res.locals.user = req.user;
 
   // set HOME_PAGE_URL
   res.locals.homePageUrl = process.env.HOME_PAGE_URL;
