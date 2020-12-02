@@ -119,12 +119,7 @@ require('./components/auth/passport'); // passport strategies
 
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path.includes('/about')) {
-    // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
-    next();
-  } else {
-    lusca.csrf()(req, res, next);
-  }
+  lusca.csrf()(req, res, next);
 });
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
