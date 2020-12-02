@@ -32,7 +32,6 @@ draft.post(
 draft.post(
   '/draft/publish',
   middleware.isAuthenticated,
-  //middleware.parsePako,
   draftController.publish
 );
 
