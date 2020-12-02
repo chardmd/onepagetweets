@@ -1,13 +1,16 @@
 {{#section 'scripts'}}
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script type="application/javascript" src="/js/lib/clipboard.min.js" defer></script>
     <script type="application/javascript" defer src="/js/pages/success.js"></script>
 {{/section}}
 <div class="custom--success">
     <div class="row">
-        <div class="d-flex w-100 text-center flex-column">
-            <div class="m-4">
-                <img src="/images/package.png" alt="success" />
-            </div>
+        <div class="d-flex w-100 text-center justify-content-center flex-column align-items-center">
+            <blockquote class="twitter-tweet">
+                <a href="https://twitter.com/{{user.profile.username}}/status/{{postId}}">
+                    <div class="custom--loading"></div>
+                </a>
+            </blockquote>
             <h2 class="text-primary m-3">Your tweet has been published</h2>
             <div class="w-100 d-flex mt-3 justify-content-center">
                 <input type="text" class="form-control w-50 custom--txtCopy" id="txtCopy"
