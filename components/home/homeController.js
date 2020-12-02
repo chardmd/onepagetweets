@@ -8,18 +8,12 @@ const HomeConstants = require('./homeConstants');
 exports.getHome = async (req, res) => {
   const { user } = req;
   if (user) {
-    const project = await HomeDAL.getProjectByUserId(user.id);
-    const twitterPost =
-      project && (await HomeService.getTwitterPost(user, project.postIds));
-    const twitterPostIds = twitterPost ? twitterPost.map((i) => i.id_str) : [];
-    twitterPostIds.length !== 0 &&
-      (await HomeDAL.updateProjectPostIds(user.id, twitterPostIds));
+    let projects = await HomeDAL.getProjects(user.id);
+    const postIds = projects.map((i) => i.postId);
+    const twitterPost = await HomeService.getTwitterPost(user, postIds);
     res.render('home/client/home', {
       title: 'Home',
       twitterPost,
-      projExist: project !== null,
-      isPublished: project !== null ? project.isPublished : false,
-      summary: project !== null ? project.summary : '',
       baseUrl: process.env.BASE_URL
     });
   } else {

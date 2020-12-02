@@ -3,6 +3,9 @@ const Project = require('../../models/Project');
 exports.getProjectByUserId = async (userId) =>
   Project.findOne({ user: userId, isPublished: false }).lean();
 
+exports.getLatestProject = async (userId) =>
+  Project.findOne({ user: userId }).sort({ createdAt: -1 }).lean();
+
 exports.updateProjectByUserId = async ({ userId, fields = {} }) => {
   const project = await Project.findOneAndUpdate(
     {

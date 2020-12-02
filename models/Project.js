@@ -5,10 +5,7 @@ const { Schema } = mongoose;
 const projectSchema = new Schema(
   {
     content: String,
-    postIds: {
-      type: Array,
-      default: []
-    },
+    postId: String,
     isPublished: {
       type: Boolean,
       default: false

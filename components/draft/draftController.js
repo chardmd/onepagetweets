@@ -1,7 +1,6 @@
 const validator = require('validator');
 const DraftDAL = require('./draftDAL');
 const DraftService = require('./draftService');
-const Project = require('../../models/Project');
 
 /**
  * GET /draft/editor
@@ -31,11 +30,13 @@ exports.getPreview = async (req, res) => {
  * GET /draft/success
  */
 exports.getSuccess = async (req, res) => {
-  const { user } = req;
-  const { username } = user.profile;
+  const user = req.user.toObject();
+  const project = await DraftDAL.getLatestProject(req.user.id);
+  const { postId } = project;
   res.render('draft/client/success', {
     title: 'Success',
-    username,
+    postId,
+    user,
     baseUrl: process.env.BASE_URL
   });
 };
@@ -100,18 +101,12 @@ exports.publish = async (req, res) => {
   const { compressed } = body;
   let base64 = DraftService.decompressPayload(compressed);
   const postId = await DraftService.uploadToTwitter(user, base64);
-  await Project.findOneAndUpdate(
-    {
-      user: user.id
-    },
-    { $push: { postIds: postId } }
-  );
-
   const project = await DraftDAL.getProjectByUserId(user.id);
   if (!project.isPublished) {
     await DraftDAL.updateProjectByUserId({
       userId: user.id,
       fields: {
+        postId,
         isPublished: true
       }
     });
