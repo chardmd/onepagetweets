@@ -1,21 +1,18 @@
-/* eslint-disable */
+(() => {
+  const copyButton = () => {
+    $('#btnCopy').removeClass('btn-primary');
+    $('#btnCopy').addClass('btn-success');
+    $('.fa-check-circle').removeClass('d-none');
+    $('#btnCopy .text').text('Copied');
+  };
 
-function copiedButton() {
-  $('#btnCopy').removeClass('btn-primary');
-  $('#btnCopy').addClass('btn-success');
-  $('.fa-check-circle').removeClass('d-none');
-  $('#btnCopy .text').text('Copied');
-}
+  //init and events
+  $(() => {
+    //clipboard copy
+    new ClipboardJS('#btnCopy');
 
-function initClipboard() {
-  new ClipboardJS('#btnCopy');
-}
-
-$(function() {
-  //clipboard copy
-  initClipboard();
-
-  $('#btnCopy').click(function() {
-    copiedButton();
+    $('#btnCopy').click(function () {
+      copyButton();
+    });
   });
-});
+})();
