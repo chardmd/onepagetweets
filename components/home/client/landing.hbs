@@ -31,8 +31,9 @@
                 <div class="p-3 d-flex justify-content-center">
                     {{#if username}}
                         <div class="col-sm custom--twitter">
-                            <a class="twitter-timeline"
-                                href="https://twitter.com/{{username}}?ref_src=twsrc%5Etfw">Loading...</a>
+                            <a class="twitter-timeline" href="https://twitter.com/{{username}}?ref_src=twsrc%5Etfw">
+                                <div class="custom--loading"></div>
+                            </a>
                         </div>
                     {{else}}
                         <img class="img-fluid" src="/images/man.png" />

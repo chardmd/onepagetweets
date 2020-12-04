@@ -50,8 +50,26 @@
 
     .custom--badge {
         padding: 5px 12px;
-        font-size: 0.8125rem;
+        font-size: 1rem;
         margin: 5px 2px 2px 2px;
+    }
+
+    .custom--loading {
+        display: flex;
+        justify-content: center;
+        margin: 2rem;
+    }
+
+    .custom--loading::after {
+        content: "";
+        width: 70px;
+        height: 70px;
+        border: 10px solid #dddddd;
+        border-top-color: #1DA1F2;
+        /* border-bottom-color: ##1DA1F2;  -- optional */
+        border-radius: 50%;
+        /* animation: spin 0.6s 0.1s linear infinite both; -- optional */
+        animation: spin 0.8s 0.1s ease-in-out infinite both;
     }
 }
 
