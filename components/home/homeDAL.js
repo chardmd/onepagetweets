@@ -1,10 +1,10 @@
 const Project = require('../../models/Project');
 
 exports.getProjects = async (userId) =>
-  await Project.find({ user: userId, isPublished: true }).lean();
+  Project.find({ user: userId, isPublished: true }).lean();
 
 exports.updateProjectPostIds = async (userId, postIds) =>
-  await Project.findOneAndUpdate(
+  Project.findOneAndUpdate(
     {
       user: userId
     },
@@ -13,3 +13,10 @@ exports.updateProjectPostIds = async (userId, postIds) =>
       upsert: true
     }
   );
+
+exports.deleteProjectsByIds = async (ids) =>
+  Project.deleteMany({
+    postId: {
+      $in: ids
+    }
+  }).lean();
