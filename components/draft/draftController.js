@@ -68,7 +68,7 @@ exports.postEditor = async (req, res) => {
       });
     } else {
       await DraftDAL.updateProjectById({
-        id: unpublishedProject.id,
+        id: unpublishedProject._id,
         fields: {
           content: content
         }
