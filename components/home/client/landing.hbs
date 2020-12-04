@@ -36,7 +36,11 @@
                             </a>
                         </div>
                     {{else}}
-                        <img class="img-fluid" src="/images/man.png" />
+                        <div class="col-sm custom--twitter">
+                            <a class="twitter-timeline" href="https://twitter.com/onepagetweets?ref_src=twsrc%5Etfw">
+                                <div class="custom--loading"></div>
+                            </a>
+                        </div>
                     {{/if}}
                 </div>
             </div>
@@ -64,7 +68,7 @@
                                 {{else}}
                                     badge-secondary
                                 {{/eq}}">
-                            Default
+                            @onepagetweets
                         </a>
                         {{#each sampleAccounts}}
                             <a href="/?u={{value}}" class="badge badge-pill custom--badge

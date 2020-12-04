@@ -1,29 +1,16 @@
 const sampleAccounts = [
   {
-    label: '@indiehackers',
-    value: 'indiehackers'
+    label: '@TheEconomist',
+    value: 'TheEconomist'
   },
-
   {
     label: '@nasa',
     value: 'nasa'
   },
-
-  {
-    label: '@dhh',
-    value: 'dhh'
-  },
-
-  {
-    label: '@wesbos',
-    value: 'wesbos'
-  },
-
   {
     label: 'arianagrande',
     value: 'arianagrande'
   },
-
   {
     label: '@billgates',
     value: 'billgates'
@@ -43,7 +30,6 @@ const sampleAccounts = [
     label: '@joerogan',
     value: 'joerogan'
   },
-
   {
     label: '@producthunt',
     value: 'producthunt'
@@ -58,15 +44,29 @@ const sampleAccounts = [
     label: '@tferriss',
     value: 'tferriss'
   },
-
   {
     label: '@justinbieber',
     value: 'justinbieber'
   },
-
   {
     label: '@jimmyfallon',
     value: 'jimmyfallon'
+  },
+  {
+    label: '@KevinHart4real',
+    value: 'KevinHart4real'
+  },
+  {
+    label: '@netflix',
+    value: 'netflix'
+  },
+  {
+    label: '@github',
+    value: 'github'
+  },
+  {
+    label: '@australia',
+    value: 'australia'
   }
 ];
 
