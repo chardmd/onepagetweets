@@ -14,15 +14,16 @@
             <h2 class="text-primary m-3">Your tweet has been published</h2>
             <div class="w-100 d-flex mt-3 justify-content-center">
                 <input type="text" class="form-control w-50 custom--txtCopy" id="txtCopy"
-                    value="{{baseUrl}}/{{username}}" />
+                    value="https://twitter.com/{{user.profile.username}}/status/{{postId}}" />
                 <button class="btn btn-primary ml-3 mr-3 w-25" type="button" id="btnCopy"
                     data-clipboard-target="#txtCopy">
                     <span class="text mr-3">Copy</span><i class="fas fa-check-circle d-none"></i>
                 </button>
             </div>
             <div class="m-4">
-                <a href="/{{username}}" target="_blank" id="btnPreview" class="mt-1">
-                    <span class="mr-3">Visit Your Site</span><i class="fas fa-external-link-alt"></i>
+                <a href="https://twitter.com/{{user.profile.username}}/status/{{postId}}" target="_blank"
+                    id="btnPreview" class="mt-1">
+                    <span class="mr-3">Visit Your Tweet</span><i class="fas fa-external-link-alt"></i>
                 </a>
             </div>
         </div>
