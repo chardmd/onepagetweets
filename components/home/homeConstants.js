@@ -1,9 +1,5 @@
 const sampleAccounts = [
   {
-    label: '@TheEconomist',
-    value: 'TheEconomist'
-  },
-  {
     label: '@nasa',
     value: 'nasa'
   },
@@ -61,6 +57,10 @@ const sampleAccounts = [
   {
     label: '@australia',
     value: 'australia'
+  },
+  {
+    label: '@TheEconomist',
+    value: 'TheEconomist'
   }
 ];
 
