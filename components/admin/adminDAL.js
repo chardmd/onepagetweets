@@ -8,11 +8,11 @@ exports.getUsers = () =>
     createdAt: -1
   });
 
-exports.deleteUserById = async id => {
+exports.deleteUserById = async (id) => {
   const { deletedCount } = await User.deleteOne({
     _id: id
   });
   if (deletedCount === 1) {
-    await Project.deleteOne({ user: id });
+    await Project.deleteMany({ user: id });
   }
 };

@@ -1,5 +1,5 @@
 {{#section 'scripts'}}
-    <script type="application/javascript" defer src="/js/pages/admin/users.js"></script>
+    <script type="application/javascript" defer src="/js/pages/users.js"></script>
 {{/section}}
 <div class="page my-projects-page">
     <input type="hidden" name="_csrf" value="{{_csrf}}" id="csrf" />
@@ -32,11 +32,14 @@
                             <td scope="row">
                                 {{name}}
                             </td>
-                            <td><a href="/{{username}}" target="_blank">{{username}}</a></td>
+                            <td><a href="https://twitter.com/{{username}}" target="_blank">{{username}}</a></td>
                             <td>
-                                <span class="pointer" onclick="deleteUser('{{id}}')">
-                                    <i class="fas fa-trash text-dark"></i>
-                                </span>
+                                {{#unless isAdmin}}
+                                    <input type="hidden" id="userId" value="{{id}}" />
+                                    <span class="pointer" id="btnDeleteUser">
+                                        <i class="fas fa-trash text-dark"></i>
+                                    </span>
+                                {{/unless}}
                             </td>
                         </tr>
                     {{/each}}

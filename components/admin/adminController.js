@@ -19,10 +19,11 @@ exports.getUsers = async (req, res) => {
 
   res.render('admin/client/users', {
     title: 'Users',
-    users: users.map(i => ({
+    users: users.map((i) => ({
       id: i.id,
       name: i.profile.name,
-      username: i.profile.username
+      username: i.profile.username,
+      isAdmin: i.isAdmin
     }))
   });
 };
