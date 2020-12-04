@@ -34,12 +34,6 @@ const sampleAccounts = [
     label: '@producthunt',
     value: 'producthunt'
   },
-
-  {
-    label: '@waitbutwhy',
-    value: 'waitbutwhy'
-  },
-
   {
     label: '@tferriss',
     value: 'tferriss'
