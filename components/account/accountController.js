@@ -28,7 +28,7 @@ exports.postDeleteAccount = async (req, res, next) => {
       _id: req.user.id
     });
     if (deletedCount === 1) {
-      await Project.deleteOne({ user: req.user.id });
+      await Project.deleteMany({ user: req.user.id });
     }
   } catch (err) {
     if (err) {
@@ -54,7 +54,7 @@ exports.getOauthUnlink = (req, res, next) => {
     }
     user[provider.toLowerCase()] = undefined;
     const tokensWithoutProviderToUnlink = user.tokens.filter(
-      token => token.kind !== provider.toLowerCase()
+      (token) => token.kind !== provider.toLowerCase()
     );
     // Some auth providers do not provide an email address in the user profile.
     // As a result, we need to verify that unlinking the provider is safe by ensuring
@@ -73,7 +73,7 @@ exports.getOauthUnlink = (req, res, next) => {
       return res.redirect('/account');
     }
     user.tokens = tokensWithoutProviderToUnlink;
-    user.save(err => {
+    user.save((err) => {
       if (err) {
         return next(err);
       }
