@@ -1,7 +1,11 @@
 const Project = require('../../models/Project');
 
 exports.getProjects = async (userId) =>
-  Project.find({ user: userId, isPublished: true }).lean();
+  Project.find({ user: userId, isPublished: true })
+    .sort({
+      createdAt: -1
+    })
+    .lean();
 
 exports.updateProjectPostIds = async (userId, postIds) =>
   Project.findOneAndUpdate(
