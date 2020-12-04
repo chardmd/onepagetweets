@@ -92,7 +92,7 @@ exports.postEditor = async (req, res) => {
  */
 exports.deleteDraft = async (req, res) => {
   const unpublishedProject = await DraftDAL.getProjectByUserId(req.user.id);
-  if (!unpublishedProject.isPublished) {
+  if (!_.isNull(unpublishedProject)) {
     await DraftDAL.deleteProjectByUserId(unpublishedProject._id);
   }
   res.status(204).end();
