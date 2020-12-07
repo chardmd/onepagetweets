@@ -8,18 +8,6 @@
     .ql-container {
         font-size: 18px;
     }
-}
-
-/** preview css **/
-.custom--preview {
-    .ql-editor {
-        min-height: 500px !important;
-        padding: 15px !important;
-        white-space: normal !important;
-        background-color: #eff6fb;
-        height: 600px !important;
-        overflow: hidden !important;
-    }
 
     /* picker */
     .color-picker {
@@ -44,6 +32,18 @@
 
     .color-picker>div:hover {
         opacity: 1;
+    }
+}
+
+/** preview css **/
+.custom--preview {
+    .ql-editor {
+        min-height: 500px !important;
+        padding: 15px !important;
+        white-space: normal !important;
+        background-color: #eff6fb;
+        height: 600px !important;
+        overflow: hidden !important;
     }
 
 }

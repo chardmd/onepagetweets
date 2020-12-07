@@ -95,13 +95,17 @@
     });
 
     //submit form
-    $('#editorForm').on('submit', (e) => {
-      e.preventDefault();
+    $('#buttonNext').on('click', (e) => {
       submitForm(editor.root.innerHTML);
     });
 
     $('#discardButton').on('click', () => {
       deleteDraft();
+    });
+
+    $('.color-picker').on('click', 'div', function () {
+      const bgColor = $(this).attr('data-col');
+      $('.ql-editor').css('background-color', bgColor);
     });
   });
 })();
