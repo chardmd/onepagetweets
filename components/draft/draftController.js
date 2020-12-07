@@ -11,7 +11,8 @@ exports.getEditor = async (req, res) => {
   const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('draft/client/editor', {
     title: 'Editor',
-    content: project !== null ? project.content : ''
+    content: project !== null ? project.content : '',
+    bgColor: project !== null ? project.bgColor : ''
   });
 };
 
@@ -23,7 +24,8 @@ exports.getPreview = async (req, res) => {
   const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('draft/client/preview', {
     title: 'Preview',
-    content: project !== null ? project.content : ''
+    content: project !== null ? project.content : '',
+    bgColor: project !== null ? project.bgColor : ''
   });
 };
 
