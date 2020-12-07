@@ -39,16 +39,9 @@
             <input type="hidden" id="slugName" name="slugName" value="{{slugName}}" />
             <input type="hidden" id="projectId" name="projectId" value="{{projectId}}" />
             <div id="editor" class="custom--editor">{{{content}}}</div>
-            <div class="mt-3">
-                <button id="buttonNext" class="btn btn-lg btn-primary float-right" type="submit">
-                    <span id="spinner" class="d-none spinner-border spinner-border-sm mr-1" role="status"
-                        aria-hidden="true"></span>
-                    <span class="text">See Preview</span>
-                </button>
-            </div>
         </div>
         <div class="col-lg-3 m-auto">
-            <h1 class="lead font-weight-normal text-center">Select a Background</h1>
+            <h1 class="lead font-weight-normal text-center mt-3 mb-3">Select a Background</h1>
             <div class="color-picker">
                 <div data-col="#1abc9c" style="background-color: #1abc9c"></div>
                 <div data-col="#2ecc71" style="background-color: #2ecc71"></div>
@@ -71,6 +64,15 @@
                 <div data-col="#bdc3c7" style="background-color: #bdc3c7"></div>
                 <div data-col="#7f8c8d" style="background-color: #7f8c8d"></div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-9 mt-3 mb-3">
+            <button id="buttonNext" class="btn btn-lg btn-primary float-right" type="submit">
+                <span id="spinner" class="d-none spinner-border spinner-border-sm mr-1" role="status"
+                    aria-hidden="true"></span>
+                <span class="text">See Preview</span>
+            </button>
         </div>
     </div>
 </div>
