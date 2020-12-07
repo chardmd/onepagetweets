@@ -11,14 +11,15 @@
     $('#buttonNext .text').text('Saving...');
   };
 
-  const submitForm = (content) => {
+  const submitForm = (content, bgColor) => {
     const csrf = $('#csrf').val();
     $.ajax({
       type: 'POST',
       url: '/draft/editor',
       data: {
         _csrf: csrf,
-        content: content
+        content,
+        bgColor
       },
       beforeSend() {
         enableLoading();
@@ -96,7 +97,9 @@
 
     //submit form
     $('#buttonNext').on('click', (e) => {
-      submitForm(editor.root.innerHTML);
+      const content = editor.root.innerHTML;
+      const bgColor = $('.ql-editor').css('background-color');
+      submitForm(content, bgColor);
     });
 
     $('#discardButton').on('click', () => {

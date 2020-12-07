@@ -46,7 +46,7 @@ exports.getSuccess = async (req, res) => {
  * POST /draft/editor
  */
 exports.postEditor = async (req, res) => {
-  const { content = '' } = req.body;
+  const { content = '', bgColor } = req.body;
 
   const validationErrors = [];
   if (validator.isEmpty(content)) {
@@ -64,13 +64,15 @@ exports.postEditor = async (req, res) => {
     if (_.isNil(unpublishedProject)) {
       await DraftDAL.createProject({
         user: req.user.id,
-        content
+        content,
+        bgColor
       });
     } else {
       await DraftDAL.updateProjectById({
         id: unpublishedProject._id,
         fields: {
-          content: content
+          content,
+          bgColor
         }
       });
     }
