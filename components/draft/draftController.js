@@ -24,6 +24,7 @@ exports.getPreview = async (req, res) => {
   const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('draft/client/preview', {
     title: 'Preview',
+    layout: 'main-desktop',
     content: project !== null ? project.content : '',
     bgColor: project !== null ? project.bgColor : ''
   });

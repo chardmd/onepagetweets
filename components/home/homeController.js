@@ -28,7 +28,7 @@ exports.getHome = async (req, res) => {
     // render landing page
     res.render('home/client/landing', {
       title: 'Landing',
-      layout: 'basic',
+      layout: 'landing',
       username: u,
       sampleAccounts: HomeConstants.sampleAccounts,
       baseUrl: process.env.BASE_URL
