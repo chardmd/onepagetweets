@@ -70,12 +70,18 @@ exports.postEditor = async (req, res) => {
         bgColor
       });
     } else {
+      let fields = {
+        content
+      };
+      if (!_.isNil(bgColor)) {
+        fields = {
+          ...fields,
+          bgColor
+        };
+      }
       await DraftDAL.updateProjectById({
         id: unpublishedProject._id,
-        fields: {
-          content,
-          bgColor
-        }
+        fields
       });
     }
   } catch (err) {

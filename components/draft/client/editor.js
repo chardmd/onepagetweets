@@ -98,7 +98,15 @@
     //submit form
     $('#buttonNext').on('click', (e) => {
       const content = editor.root.innerHTML;
-      const bgColor = $('.ql-editor').css('background-color');
+      let bgColor;
+      let style = $('.ql-editor').attr('style');
+      if (style) {
+        bgColor = style
+          .split(';')
+          .filter((item) => item.startsWith('background-color'))[0]
+          .split(':')[1]
+          .trim();
+      }
       submitForm(content, bgColor);
     });
 
