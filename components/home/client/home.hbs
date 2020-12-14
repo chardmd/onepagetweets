@@ -48,9 +48,14 @@
                     <p class="lead">Click the button below to get started.</p>
                     <div class="d-flex flex-column flex-md-row">
                         <input type="hidden" id="csrf" name="_csrf" value="{{_csrf}}" />
-                        <h1 class="display-5 text-dark"><a id="btnDraftTweet" href="#"
-                                class="btn btn-lg btn-primary shadow-sm">
-                                <i class="far fa-edit fa-sm text-white-50"></i> Draft a Tweet</a></h1>
+                        <h1 class="display-5 text-dark">
+                            <button id="btnDraftTweet" class="btn btn-lg btn-primary float-right" type="submit">
+                                <span id="spinner" class="d-none spinner-border spinner-border-sm mr-1" role="status"
+                                    aria-hidden="true"></span>
+                                <i class="far fa-edit fa-sm text-white-50"></i>
+                                <span class="text">Draft Tweet</span>
+                            </button>
+                        </h1>
                     </div>
                 </div>
             </div>

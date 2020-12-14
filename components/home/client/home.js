@@ -1,14 +1,14 @@
 (() => {
   const disabledLoading = () => {
     $('#spinner').addClass('d-none');
-    $('#buttonNext').attr('disabled', false);
-    $('#buttonNext .text').text('Next');
+    $('#btnDraftTweet').attr('disabled', false);
+    $('#btnDraftTweet .text').text('Draft Tweet');
   };
 
   const enableLoading = () => {
     $('#spinner').removeClass('d-none');
-    $('#buttonNext').attr('disabled', true);
-    $('#buttonNext .text').text('Saving...');
+    $('#btnDraftTweet').attr('disabled', true);
+    $('#btnDraftTweet .text').text('Loading...');
   };
 
   const createProject = () => {
@@ -23,7 +23,6 @@
         enableLoading();
       },
       success() {
-        disabledLoading();
         Turbolinks.visit(`/draft/editor`);
       },
       error(err) {
