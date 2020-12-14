@@ -64,8 +64,7 @@
     }
   };
 
-  //init and events
-  $(() => {
+  const initQuillEditor = () => {
     const fontSizeArr = [
       '8px',
       '9px',
@@ -107,6 +106,15 @@
       theme: 'snow'
     });
 
+    return editor;
+  };
+
+  //init and events
+  $(() => {
+    //init editor
+    const editor = initQuillEditor();
+
+    //set button status
     const text = editor.getText();
     setButtonActive(text);
 
