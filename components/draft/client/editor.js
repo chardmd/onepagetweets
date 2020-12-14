@@ -66,12 +66,7 @@
 
   const initQuillEditor = () => {
     const fontSizeArr = [
-      '8px',
-      '9px',
-      '10px',
-      '12px',
-      '14px',
-      '16px',
+      '18px',
       '20px',
       '24px',
       '32px',
@@ -79,7 +74,8 @@
       '54px',
       '68px',
       '84px',
-      '98px'
+      '98px',
+      '100px'
     ];
     const toolbarOptions = [
       [{ size: fontSizeArr }],
@@ -145,7 +141,15 @@
 
     $('.color-picker').on('click', 'div', function () {
       const bgColor = $(this).attr('data-col');
-      $('.ql-editor').css('background-color', bgColor);
+      $('.color-picker > div').css({
+        opacity: 0.7,
+        border: 'none'
+      });
+      $(this).css({
+        opacity: 1,
+        border: '1px solid #2780e3'
+      });
+      $('.ql-editor').attr('style', `background-color:${bgColor};`);
     });
   });
 })();

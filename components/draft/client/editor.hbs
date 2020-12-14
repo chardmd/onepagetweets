@@ -44,7 +44,9 @@
             <h1 class="lead font-weight-normal text-center mt-3 mb-3">Select a Background</h1>
             <div class="color-picker">
                 {{#each colors}}
-                    <div data-col="{{this}}" style="background-color:{{this}}"></div>
+                    <div data-col="{{this}}"
+                        style="background-color:{{this}};{{#eq this ../bgColor}}opacity:1;border: 1px solid #2780e3;{{/eq}}">
+                        &nbsp;</div>
                 {{/each}}
             </div>
         </div>

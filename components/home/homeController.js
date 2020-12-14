@@ -35,3 +35,29 @@ exports.getHome = async (req, res) => {
     });
   }
 };
+
+/**
+ * POST /home/create
+ */
+exports.postCreate = async (req, res) => {
+  const validationErrors = [];
+  try {
+    const unpublishedProject = await HomeDAL.getProjectByUserId(req.user.id);
+    if (_.isNil(unpublishedProject)) {
+      await HomeDAL.createProject({
+        user: req.user.id,
+        content: '',
+        bgColor: '#eff6fb' //set default color
+      });
+    }
+  } catch (err) {
+    console.log({ err });
+    validationErrors.push({
+      msg: 'Error creating project. Please try again.'
+    });
+    req.flash('errors', validationErrors);
+    return res.redirect(`/draft/editor`);
+  }
+
+  res.status(204).end();
+};

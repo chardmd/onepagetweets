@@ -24,3 +24,11 @@ exports.deleteProjectsByIds = async (ids) =>
       $in: ids
     }
   }).lean();
+
+exports.getProjectByUserId = async (userId) =>
+  Project.findOne({ user: userId, isPublished: false }).lean();
+
+exports.createProject = async (fields) => {
+  const project = await Project.create(fields);
+  return project;
+};

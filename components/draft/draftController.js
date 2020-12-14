@@ -86,36 +86,27 @@ exports.postEditor = async (req, res) => {
 
   try {
     const unpublishedProject = await DraftDAL.getProjectByUserId(req.user.id);
-    if (_.isNil(unpublishedProject)) {
-      await DraftDAL.createProject({
-        user: req.user.id,
-        content,
+    let fields = {
+      content
+    };
+    if (!_.isNil(bgColor)) {
+      fields = {
+        ...fields,
         bgColor
-      });
-    } else {
-      let fields = {
-        content
       };
-      if (!_.isNil(bgColor)) {
-        fields = {
-          ...fields,
-          bgColor
-        };
-      }
-      await DraftDAL.updateProjectById({
-        id: unpublishedProject._id,
-        fields
-      });
     }
+    await DraftDAL.updateProjectById({
+      id: unpublishedProject._id,
+      fields
+    });
   } catch (err) {
     console.log({ err });
     validationErrors.push({
-      msg: 'Error creating project. Please try again.'
+      msg: 'Error updating project. Please try again.'
     });
     req.flash('errors', validationErrors);
     return res.redirect(`/draft/editor`);
   }
-
   return res.status(200).json({ msg: 'success' });
 };
 

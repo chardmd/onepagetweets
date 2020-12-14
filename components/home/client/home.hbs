@@ -25,6 +25,7 @@
 {{/section}}
 {{#section 'scripts'}}
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script type="application/javascript" defer src="/js/pages/home.js"></script>
 {{/section}}
 <div class="custom--home">
     <!-- display flash messages -->
@@ -46,7 +47,8 @@
                     </p>
                     <p class="lead">Click the button below to get started.</p>
                     <div class="d-flex flex-column flex-md-row">
-                        <h1 class="display-5 text-dark"><a href="/draft/editor"
+                        <input type="hidden" id="csrf" name="_csrf" value="{{_csrf}}" />
+                        <h1 class="display-5 text-dark"><a id="btnDraftTweet" href="#"
                                 class="btn btn-lg btn-primary shadow-sm">
                                 <i class="far fa-edit fa-sm text-white-50"></i> Draft a Tweet</a></h1>
                     </div>
