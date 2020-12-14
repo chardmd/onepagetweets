@@ -56,7 +56,7 @@ exports.postCreate = async (req, res) => {
       msg: 'Error creating project. Please try again.'
     });
     req.flash('errors', validationErrors);
-    return res.redirect(`/draft/editor`);
+    return res.redirect(`/`);
   }
 
   res.status(204).end();
