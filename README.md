@@ -1,6 +1,6 @@
 ## One Page Tweets
 
-Promote yourself and use the power of tweets to build your profile.
+Design, and publish more words with Onepagetweets.com
 
 ![Alt Text](preview.png)
 
