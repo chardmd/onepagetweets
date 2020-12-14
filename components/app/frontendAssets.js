@@ -7,7 +7,6 @@ const librariesPath = [
   'node_modules/popper.js/dist/umd',
   'node_modules/bootstrap/dist/js',
   'node_modules/jquery.easing',
-  'node_modules/sharer.js',
   'node_modules/clipboard/dist',
   'node_modules/html2canvas/dist',
   'node_modules/@fortawesome/fontawesome-free',
