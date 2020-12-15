@@ -42,6 +42,10 @@ exports.getHome = async (req, res) => {
 exports.postCreate = async (req, res) => {
   const validationErrors = [];
   try {
+    const totalProjectCount = await HomeDAL.countProjectTotal(req.user.id);
+    if (totalProjectCount === process.env.MAX_PROJECT_COUNT) {
+      return res.redirect(`/account`);
+    }
     const unpublishedProject = await HomeDAL.getProjectByUserId(req.user.id);
     if (_.isNil(unpublishedProject)) {
       await HomeDAL.createProject({

@@ -32,3 +32,6 @@ exports.createProject = async (fields) => {
   const project = await Project.create(fields);
   return project;
 };
+
+exports.countProjectTotal = async (userId) =>
+  Project.find({ user: userId, isPublished: true }).countDocuments();

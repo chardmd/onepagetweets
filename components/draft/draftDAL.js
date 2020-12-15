@@ -20,3 +20,6 @@ exports.updateProjectById = async ({ id, fields = {} }) => {
 
 exports.deleteProjectByUserId = async (id) =>
   Project.deleteOne({ _id: id }).lean();
+
+exports.countProjectTotal = async (userId) =>
+  Project.find({ user: userId, isPublished: true }).countDocuments();
