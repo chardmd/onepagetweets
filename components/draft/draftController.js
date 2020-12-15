@@ -35,6 +35,18 @@ exports.getEditor = async (req, res) => {
  */
 exports.getPreview = async (req, res) => {
   const { user } = req;
+  const validationErrors = [];
+
+  //forbid accessing the page
+  const totalProjectCount = await DraftDAL.countProjectTotal(req.user.id);
+  if (totalProjectCount === parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
+    validationErrors.push({
+      msg: 'You dont have permission to view the page'
+    });
+    req.flash('errors', validationErrors);
+    return res.redirect(`/`);
+  }
+
   const project = await DraftDAL.getProjectByUserId(user.id);
   res.render('draft/client/preview', {
     title: 'Preview',
@@ -49,6 +61,18 @@ exports.getPreview = async (req, res) => {
  */
 exports.getSuccess = async (req, res) => {
   const user = req.user.toObject();
+  const validationErrors = [];
+
+  //forbid accessing the page
+  const totalProjectCount = await DraftDAL.countProjectTotal(req.user.id);
+  if (totalProjectCount === parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
+    validationErrors.push({
+      msg: 'You dont have permission to view the page'
+    });
+    req.flash('errors', validationErrors);
+    return res.redirect(`/`);
+  }
+
   const project = await DraftDAL.getLatestProject(req.user.id);
   const { postId } = project;
   res.render('draft/client/success', {
