@@ -112,7 +112,9 @@ exports.postEditor = async (req, res) => {
     req.flash('errors', validationErrors);
     return res.redirect(`/draft/editor`);
   }
-  return res.status(200).json({ msg: 'success' });
+
+  //success
+  return res.redirect(`/draft/preview`);
 };
 
 /**

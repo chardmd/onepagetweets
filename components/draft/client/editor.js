@@ -26,11 +26,9 @@
       },
       success() {
         disabledLoading();
-        Turbolinks.visit(`/draft/preview`);
       },
       error(err) {
         console.log(err);
-        Turbolinks.visit(`/draft/editor`);
       }
     });
   };
