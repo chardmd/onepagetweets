@@ -3,6 +3,7 @@ const validator = require('validator');
 const DraftDAL = require('./draftDAL');
 const DraftService = require('./draftService');
 const DraftConstant = require('./draftConstant');
+const { isNil } = require('lodash');
 
 /**
  * GET /draft/editor
@@ -100,10 +101,17 @@ exports.postEditor = async (req, res) => {
         bgColor
       };
     }
-    await DraftDAL.updateProjectById({
-      id: unpublishedProject._id,
-      fields
-    });
+    if (!isNil(unpublishedProject)) {
+      await DraftDAL.updateProjectById({
+        id: unpublishedProject._id,
+        fields
+      });
+    } else {
+      await DraftDAL.createProject({
+        user: req.user.id,
+        ...fields
+      });
+    }
   } catch (err) {
     console.log({ err });
     validationErrors.push({
@@ -122,11 +130,22 @@ exports.postEditor = async (req, res) => {
  * Delete Unpublished Project
  */
 exports.deleteDraft = async (req, res) => {
-  const unpublishedProject = await DraftDAL.getProjectByUserId(req.user.id);
-  if (!_.isNull(unpublishedProject)) {
-    await DraftDAL.deleteProjectByUserId(unpublishedProject._id);
+  const validationErrors = [];
+  try {
+    const unpublishedProject = await DraftDAL.getProjectByUserId(req.user.id);
+    if (!_.isNull(unpublishedProject)) {
+      await DraftDAL.deleteProjectByUserId(unpublishedProject._id);
+    }
+  } catch (ex) {
+    console.log({ err });
+    validationErrors.push({
+      msg: 'Error deleting draft.'
+    });
+    req.flash('errors', validationErrors);
+    return res.redirect(`/draft/editor`);
   }
-  res.status(204).end();
+  //success
+  return res.redirect(`/draft/editor`);
 };
 
 /**

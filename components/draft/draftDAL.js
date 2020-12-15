@@ -23,3 +23,8 @@ exports.deleteProjectByUserId = async (id) =>
 
 exports.countProjectTotal = async (userId) =>
   Project.find({ user: userId, isPublished: true }).countDocuments();
+
+exports.createProject = async (fields) => {
+  const project = await Project.create(fields);
+  return project;
+};

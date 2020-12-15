@@ -42,13 +42,7 @@
         data: {
           _csrf: csrf
         },
-        url: `/draft/delete`,
-        success: function () {
-          Turbolinks.visit(`/draft/editor`);
-        },
-        error: function () {
-          Turbolinks.visit(`/draft/editor`);
-        }
+        url: `/draft/delete`
       });
     }
   };
