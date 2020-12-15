@@ -3,7 +3,7 @@ const billingController = require('./billingController');
 const middlewareUtil = require('../utils/middleware');
 
 billing.get(
-  '/billing/projects/:projectId',
+  '/billing',
   middlewareUtil.isAuthenticated,
   billingController.getBilling
 );

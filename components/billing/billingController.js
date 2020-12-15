@@ -8,16 +8,10 @@ const BillingService = require('./billingService');
 const BillingDAL = require('./billingDAL');
 
 exports.getBilling = async (req, res) => {
-  const { projectId } = req.params;
-  const project = await BillingDAL.getProjectById(projectId);
   res.render(`billing/client/billing-form`, {
-    title: 'API Examples',
+    title: 'Billing Details',
     stripePublicKey: process.env.STRIPE_PKEY,
-    stripePlanId: process.env.PLAN_ID,
-    projectId,
-    project: {
-      projectName: project.projectName
-    }
+    stripePlanId: process.env.PLAN_ID
   });
 };
 

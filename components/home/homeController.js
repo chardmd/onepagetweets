@@ -44,7 +44,7 @@ exports.postCreate = async (req, res) => {
   try {
     const totalProjectCount = await HomeDAL.countProjectTotal(req.user.id);
     if (totalProjectCount === parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
-      return res.redirect(`/account`);
+      return res.redirect(`/billing`);
     }
     const unpublishedProject = await HomeDAL.getProjectByUserId(req.user.id);
     if (_.isNil(unpublishedProject)) {
