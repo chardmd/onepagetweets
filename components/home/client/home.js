@@ -1,10 +1,4 @@
 (() => {
-  const disabledLoading = () => {
-    $('#spinner').addClass('d-none');
-    $('#btnDraftTweet').attr('disabled', false);
-    $('#btnDraftTweet .text').text('Draft Tweet');
-  };
-
   const enableLoading = () => {
     $('#spinner').removeClass('d-none');
     $('#btnDraftTweet').attr('disabled', true);
