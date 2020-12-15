@@ -22,9 +22,6 @@
       beforeSend() {
         enableLoading();
       },
-      success() {
-        Turbolinks.visit(`/draft/editor`);
-      },
       error(err) {
         console.log(err);
         Turbolinks.visit(`/draft/editor`);

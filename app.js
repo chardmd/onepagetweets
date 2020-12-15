@@ -18,6 +18,7 @@ const passport = require('passport');
 const sass = require('node-sass-middleware');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
+const turbolinks = require('turbolinks-express');
 const appRouter = require('./components/app/appRoutes');
 const hbs = require('./components/app/appService');
 const jsLibraries = require('./components/app/frontendAssets');
@@ -116,6 +117,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 require('./components/auth/passport'); // passport strategies
+
+// turbolinks
+app.use(turbolinks.redirect);
+app.use(turbolinks.location);
 
 app.use(flash());
 app.use((req, res, next) => {
