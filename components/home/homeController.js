@@ -63,5 +63,5 @@ exports.postCreate = async (req, res) => {
     return res.redirect(`/`);
   }
 
-  res.status(204).end();
+  return res.redirect(`/draft/editor`);
 };
