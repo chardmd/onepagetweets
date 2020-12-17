@@ -11,10 +11,10 @@
     $('#buttonPayment .text').text('Please wait...');
   };
 
-  const createCheckoutSession = (projectId, publicKey) => {
+  const createCheckoutSession = (publicKey) => {
     $.ajax({
       type: 'POST',
-      url: `/billing/projects/${projectId}/create-checkout-session`,
+      url: `/billing/create-checkout-session`,
       data: {
         _csrf: $('#csrf').val()
       },
@@ -27,7 +27,7 @@
         stripe.redirectToCheckout({ sessionId: data.sessionId });
       },
       error(err) {
-        Turbolinks.visit(`/billing/projects/${projectId}`);
+        Turbolinks.visit(`/billing`);
       }
     });
   };
@@ -35,7 +35,6 @@
   //init and events
   $(() => {
     /* Get your Stripe publishable key to initialize Stripe.js */
-    const projectId = $('#projectId').val();
     const publicKey = $('#stripePublicKey').val();
 
     // reset button state
@@ -43,7 +42,7 @@
 
     // Setup event handler to create a Checkout Session when button is clicked
     $('#buttonPayment').on('click', () => {
-      createCheckoutSession(projectId, publicKey);
+      createCheckoutSession(publicKey);
     });
   });
 })();

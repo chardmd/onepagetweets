@@ -8,7 +8,7 @@ billing.get(
   billingController.getBilling
 );
 billing.post(
-  '/billing/projects/:projectId/create-checkout-session',
+  '/billing/create-checkout-session',
   middlewareUtil.isAuthenticated,
   billingController.createCheckoutSession
 );

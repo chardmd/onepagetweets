@@ -48,9 +48,7 @@ exports.getSuccess = async (req, res) => {
  * https://dashboard.stripe.com/settings/emails
  */
 exports.createCheckoutSession = async (req, res) => {
-  const { projectId } = req.params;
-  const project = await BillingDAL.getProjectById(projectId);
-  const session = await BillingService.createStripeSession(project);
+  const session = await BillingService.createStripeSession();
   res.send({
     sessionId: session.id
   });
