@@ -16,11 +16,8 @@ exports.createStripeSession = async () => {
         amount: process.env.STRIPE_BASE_PRICE // Keep the amount on the server to prevent customers from manipulating on client
       }
     ],
-    // metadata: {
-    //   projectId: project.id
-    // },
     success_url: `${process.env.BASE_URL}/billing/success?sessionId={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.BASE_URL}/billing/cancel`
+    cancel_url: `${process.env.BASE_URL}/billing`
   });
 
   return session;
