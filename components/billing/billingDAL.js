@@ -1,4 +1,3 @@
-const moment = require('moment');
 const Billing = require('../../models/Billing');
 
 exports.getBillingByUserId = async (userId) =>
@@ -11,7 +10,7 @@ exports.saveBilling = async ({ paymentObject, user }) => {
     status: paymentObject.payment_status,
     currency: paymentObject.currency,
     paymentMethod: paymentObject.subscription,
-    created: moment(new Date()),
+    sessionId: paymentObject.sessionId,
     isActive: true,
     user: user.id
   });

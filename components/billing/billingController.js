@@ -34,7 +34,8 @@ exports.getSuccess = async (req, res) => {
       amount_total,
       payment_status,
       currency,
-      subscription
+      subscription,
+      sessionId
     };
     await BillingDAL.saveBilling({ paymentObject, user });
   }
