@@ -4,16 +4,15 @@ const stripe = require('stripe')(process.env.STRIPE_SKEY);
 
 exports.createStripeSession = async () => {
   const session = await stripe.checkout.sessions.create({
+    mode: 'subscription',
     payment_method_types: process.env.STRIPE_PAYMENT_METHODS.split(', '),
+    billing_address_collection: 'auto',
     locale: 'en',
     line_items: [
       {
-        name: `Publish Personal Tweets`,
-        images: [process.env.STRIPE_PHOTO_URL],
         quantity: 1,
-        description: 'Access all exclusive features for this project',
-        currency: process.env.STRIPE_CURRENCY,
-        amount: process.env.STRIPE_BASE_PRICE // Keep the amount on the server to prevent customers from manipulating on client
+        description: 'Design and personalize your tweets',
+        price: 'price_1HzokSJ26sFNUh853x9NdSD6' //configurable via stripe under Products => Pricing
       }
     ],
     success_url: `${process.env.BASE_URL}/billing/success?sessionId={CHECKOUT_SESSION_ID}`,

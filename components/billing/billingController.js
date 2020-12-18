@@ -4,6 +4,7 @@
  * Contact form page.
  */
 require('dotenv').config();
+const _ = require('lodash');
 const BillingService = require('./billingService');
 const BillingDAL = require('./billingDAL');
 
@@ -20,26 +21,25 @@ exports.getSuccess = async (req, res) => {
   const { sessionId } = req.query;
   const session = await BillingService.getStripeSession(sessionId);
   const {
-    payment_intent,
-    metadata: { projectId }
+    currency,
+    customer,
+    payment_status,
+    subscription,
+    amount_total
   } = session;
-  const project = await BillingDAL.getProjectById(projectId);
-
-  if (!project.billing) {
-    const paymentObject = await BillingService.getStripePaymentIntent(
-      payment_intent
-    );
-    const billing = await BillingDAL.saveBilling({
-      paymentObject,
-      project,
-      user
-    });
-    await BillingDAL.updateProjectBilling(projectId, billing);
+  const billing = await BillingDAL.getBillingByUserId(user._id);
+  if (_.isNil(billing)) {
+    const paymentObject = {
+      customer,
+      amount_total,
+      payment_status,
+      currency,
+      subscription
+    };
+    await BillingDAL.saveBilling({ paymentObject, user });
   }
-
   res.render('billing/client/success', {
-    title: 'Billing Success',
-    projectName: project.projectName
+    title: 'Billing Success'
   });
 };
 

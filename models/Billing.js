@@ -7,8 +7,10 @@ const billingSchema = new Schema(
     customer: String,
     amount: String,
     status: String,
+    currency: String,
     created: Date,
-    paymentMethod: String,
+    type: String,
+    isActive: Boolean,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
