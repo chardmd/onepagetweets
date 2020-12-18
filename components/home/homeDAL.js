@@ -39,3 +39,14 @@ exports.countProjectTotal = async (userId) =>
 
 exports.getBillingByUserId = async (userId) =>
   Billing.findOne({ user: userId, isActive: true }).lean();
+
+exports.disabledBilling = async (userId) =>
+  Billing.findOneAndUpdate(
+    {
+      user: userId,
+      isActive: true
+    },
+    {
+      isActive: false
+    }
+  );

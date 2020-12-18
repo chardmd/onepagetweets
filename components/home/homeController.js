@@ -42,23 +42,7 @@ exports.getHome = async (req, res) => {
 exports.postCreate = async (req, res) => {
   const validationErrors = [];
   try {
-    //check if the total projects of the customer
-    const totalProjectCount = await HomeDAL.countProjectTotal(req.user.id);
-    //check if the customer has subscribe to the service
-    const billing = await HomeDAL.getBillingByUserId(req.user._id);
-    const subscription =
-      !_.isNil(billing) &&
-      (await HomeService.getSubscription(billing.subscriptionId));
-    /**
-     * we allow the creation of project if:
-     * 1) the customer has less than 3 projects
-     * 2) Or the customer subscribe to our service
-     */
-    if (
-      totalProjectCount < parseInt(process.env.MAX_PROJECT_COUNT, 10) ||
-      (!_.isNil(subscription) &&
-        subscription.status === HomeConstants.paymentStatus.ACTIVE)
-    ) {
+    const createProject = async () => {
       const unpublishedProject = await HomeDAL.getProjectByUserId(req.user.id);
       if (_.isNil(unpublishedProject)) {
         await HomeDAL.createProject({
@@ -68,9 +52,33 @@ exports.postCreate = async (req, res) => {
         });
       }
       return res.redirect(`/draft/editor`);
+    };
+    //check if the total projects of the customer
+    const totalProjectCount = await HomeDAL.countProjectTotal(req.user.id);
+    /**
+     * we allow the creation of project if:
+     * 1) the customer has less than 3 projects
+     * 2) Or the customer subscribe to our service
+     */
+    if (totalProjectCount < parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
+      return createProject(); //create and redirect
     } else {
-      //customer needs to pay
-      return res.redirect(`/billing`);
+      //check if the customer has subscribe to the service
+      const billing = await HomeDAL.getBillingByUserId(req.user._id);
+      const subscription =
+        !_.isNil(billing) &&
+        (await HomeService.getSubscription(billing.subscriptionId));
+
+      if (
+        !_.isNil(subscription) &&
+        subscription.status === HomeConstants.paymentStatus.ACTIVE
+      ) {
+        return createProject(); //create and redirect
+      } else {
+        //customer needs to pay
+        await HomeDAL.disabledBilling(req.user._id);
+        return res.redirect(`/billing`);
+      }
     }
   } catch (err) {
     console.log({ err });
