@@ -9,7 +9,7 @@ exports.saveBilling = async ({ paymentObject, user }) => {
     amount: paymentObject.amount_total,
     status: paymentObject.payment_status,
     currency: paymentObject.currency,
-    subscriptionId: paymentObject.subscription,
+    subscriptionId: paymentObject.subscriptionId,
     sessionId: paymentObject.sessionId,
     isActive: true,
     user: user.id

@@ -24,7 +24,7 @@ exports.getSuccess = async (req, res) => {
     currency,
     customer,
     payment_status,
-    subscription,
+    subscription: subscriptionId,
     amount_total
   } = session;
   const billing = await BillingDAL.getBillingByUserId(user._id);
@@ -34,7 +34,7 @@ exports.getSuccess = async (req, res) => {
       amount_total,
       payment_status,
       currency,
-      subscription,
+      subscriptionId,
       sessionId
     };
     await BillingDAL.saveBilling({ paymentObject, user });
