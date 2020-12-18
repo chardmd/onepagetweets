@@ -64,6 +64,12 @@ const sampleAccounts = [
   }
 ];
 
+const paymentStatus = {
+  ACTIVE: 'active',
+  CANCELED: 'canceled'
+};
+
 module.exports = {
-  sampleAccounts
+  sampleAccounts,
+  paymentStatus
 };

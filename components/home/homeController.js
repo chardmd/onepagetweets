@@ -42,17 +42,35 @@ exports.getHome = async (req, res) => {
 exports.postCreate = async (req, res) => {
   const validationErrors = [];
   try {
+    //check if the total projects of the customer
     const totalProjectCount = await HomeDAL.countProjectTotal(req.user.id);
-    if (totalProjectCount === parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
+    //check if the customer has subscribe to the service
+    const billing = await HomeDAL.getBillingByUserId(req.user._id);
+    const subscription =
+      !_.isNil(billing) &&
+      (await HomeService.getSubscription(billing.subscriptionId));
+    /**
+     * we allow the creation of project if:
+     * 1) the customer has less than 3 projects
+     * 2) Or the customer subscribe to our service
+     */
+    if (
+      totalProjectCount < parseInt(process.env.MAX_PROJECT_COUNT, 10) ||
+      (!_.isNil(subscription) &&
+        subscription.status === HomeConstants.paymentStatus.ACTIVE)
+    ) {
+      const unpublishedProject = await HomeDAL.getProjectByUserId(req.user.id);
+      if (_.isNil(unpublishedProject)) {
+        await HomeDAL.createProject({
+          user: req.user.id,
+          content: '',
+          bgColor: '#eff6fb' //set default color
+        });
+      }
+      return res.redirect(`/draft/editor`);
+    } else {
+      //customer needs to pay
       return res.redirect(`/billing`);
-    }
-    const unpublishedProject = await HomeDAL.getProjectByUserId(req.user.id);
-    if (_.isNil(unpublishedProject)) {
-      await HomeDAL.createProject({
-        user: req.user.id,
-        content: '',
-        bgColor: '#eff6fb' //set default color
-      });
     }
   } catch (err) {
     console.log({ err });
@@ -62,6 +80,4 @@ exports.postCreate = async (req, res) => {
     req.flash('errors', validationErrors);
     return res.redirect(`/`);
   }
-
-  return res.redirect(`/draft/editor`);
 };

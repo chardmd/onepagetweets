@@ -1,3 +1,5 @@
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const Twitter = require('twitter-lite');
 
 const getTwitterPost = async (user, postIds) => {
@@ -16,6 +18,12 @@ const getTwitterPost = async (user, postIds) => {
   return result;
 };
 
+const getSubscription = async (subscriptionId) => {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  return subscription;
+};
+
 module.exports = {
-  getTwitterPost
+  getTwitterPost,
+  getSubscription
 };

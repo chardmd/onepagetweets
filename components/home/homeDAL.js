@@ -1,4 +1,5 @@
 const Project = require('../../models/Project');
+const Billing = require('../../models/Billing');
 
 exports.getProjects = async (userId) =>
   Project.find({ user: userId, isPublished: true })
@@ -35,3 +36,6 @@ exports.createProject = async (fields) => {
 
 exports.countProjectTotal = async (userId) =>
   Project.find({ user: userId, isPublished: true }).countDocuments();
+
+exports.getBillingByUserId = async (userId) =>
+  Billing.findOne({ user: userId, isActive: true }).lean();

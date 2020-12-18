@@ -2,11 +2,6 @@
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 
-exports.getSubscription = async (subscriptionId) => {
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-  return subscription;
-};
-
 exports.createStripeSession = async () => {
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
