@@ -10,6 +10,7 @@ const billingSchema = new Schema(
     currency: String,
     type: String,
     sessionId: String,
+    subscriptionId: String,
     isActive: Boolean,
     user: {
       type: mongoose.Schema.Types.ObjectId,
