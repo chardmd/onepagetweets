@@ -12,7 +12,7 @@ exports.createStripeSession = async () => {
       {
         quantity: 1,
         description: 'Design and personalize your tweets',
-        price: 'price_1HzokSJ26sFNUh853x9NdSD6' //configurable via stripe under Products => Pricing
+        price: process.env.STRIPE_SUBSCRIPTION_ID //configurable via stripe under Products => Pricing
       }
     ],
     success_url: `${process.env.BASE_URL}/billing/success?sessionId={CHECKOUT_SESSION_ID}`,
