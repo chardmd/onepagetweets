@@ -13,8 +13,13 @@ exports.getEditor = async (req, res) => {
   const validationErrors = [];
 
   //forbid accessing the page
+  const billing = await DraftDAL.getBilling(req.user._id);
   const totalProjectCount = await DraftDAL.countProjectTotal(req.user.id);
-  if (totalProjectCount === parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
+  if (
+    totalProjectCount > parseInt(process.env.MAX_PROJECT_COUNT, 10) &&
+    !_.isNil(billing) &&
+    !billing.isActive
+  ) {
     validationErrors.push({
       msg: 'You dont have permission to view the page'
     });
@@ -39,8 +44,13 @@ exports.getPreview = async (req, res) => {
   const validationErrors = [];
 
   //forbid accessing the page
+  const billing = await DraftDAL.getBilling(req.user._id);
   const totalProjectCount = await DraftDAL.countProjectTotal(req.user.id);
-  if (totalProjectCount === parseInt(process.env.MAX_PROJECT_COUNT, 10)) {
+  if (
+    totalProjectCount > parseInt(process.env.MAX_PROJECT_COUNT, 10) &&
+    !_.isNil(billing) &&
+    !billing.isActive
+  ) {
     validationErrors.push({
       msg: 'You dont have permission to view the page'
     });

@@ -1,4 +1,5 @@
 const Project = require('../../models/Project');
+const Billing = require('../../models/Billing');
 
 exports.getProjectByUserId = async (userId) =>
   Project.findOne({ user: userId, isPublished: false }).lean();
@@ -28,3 +29,6 @@ exports.createProject = async (fields) => {
   const project = await Project.create(fields);
   return project;
 };
+
+exports.getBilling = async (userId) =>
+  Billing.findOne({ user: userId, isActive: true }).lean();
