@@ -9,7 +9,7 @@ const AccountService = require('./accountService');
 exports.getAccount = (req, res) => {
   const { user } = req;
 
-  res.render('account/client/profile', {
+  res.render('account/client/account', {
     title: 'Account Management',
     email: user.email,
     name: user.profile.name,
