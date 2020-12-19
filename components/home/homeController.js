@@ -83,7 +83,7 @@ exports.postCreate = async (req, res) => {
   } catch (err) {
     console.log({ err });
     validationErrors.push({
-      msg: 'Error creating project. Please try again.'
+      msg: 'Error drafting tweet. Please try again.'
     });
     req.flash('errors', validationErrors);
     return res.redirect(`/`);
