@@ -12,7 +12,8 @@ exports.getAccount = async (req, res) => {
   res.render('account/client/account', {
     title: 'Account Management',
     hasBilling: !_.isNil(billing),
-    cancelAt: !_.isNil(billing) && billing.cancelAt
+    cancelAt: !_.isNil(billing) && billing.cancelAt,
+    amount: process.env.STRIPE_PRICE
   });
 };
 
