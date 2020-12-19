@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const User = require('../../models/User');
 const Project = require('../../models/Project');
+const AccountDAL = require('./accountDAL');
 /**
  * GET /account
  * Profile page.
@@ -28,7 +29,8 @@ exports.postDeleteAccount = async (req, res, next) => {
       _id: req.user.id
     });
     if (deletedCount === 1) {
-      await Project.deleteMany({ user: req.user.id });
+      await AccountDAL.deleteProjectsByUserId(req.user.id);
+      await AccountDAL.deleteBillingByUserId(req.user.id);
     }
   } catch (err) {
     if (err) {
