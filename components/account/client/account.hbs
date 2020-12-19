@@ -7,26 +7,42 @@
     <!-- display flash messages -->
     <div class="card border-0">
         <div class="card-body">
-            <form action="/account/delete" method="POST">
-                <input id="csrf" type="hidden" name="_csrf" value="{{_csrf}}">
-                <div class="pb-2 mt-2 mb-4 border-bottom">
-                    <h4>Manage My Account</h4>
+            <input id="csrf" type="hidden" name="_csrf" value="{{_csrf}}">
+            <div class="pb-2 mt-2 mb-4 border-bottom">
+                <h4 class="font-weight-bold">Cancel Subscription</h4>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <p class="text-secondary">You are currently subscribe as a paid user. This will cancel your
+                        current subscription after the end of biling cycle.
+                    </p>
+                    <button id="btnCancelSubscription" class="btn btn-lg btn-secondary" type="submit"><i
+                            class="far fa-window-close fa-sm"></i>&nbsp;Cancel Subscription</button>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <p>The following information will be deleted:</p>
-                        <ul class="list-group mt-4">
-                            <li class="list-group-item">* User data</li>
-                            <li class="list-group-item"> * The tweets posted using this service</li>
-                        </ul>
-                        <br />
-                        <p class="text-danger">Once you delete this account, there is no going back. Please be certain.
-                        </p>
-                        <button id="btnDeleteAccount" class="btn btn-lg btn-danger" type="submit"><i
-                                class="fas fa-trash fa-sm"></i>&nbsp;Delete
-                            Account</button>
-                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0">
+        <div class="card-body">
+            <div class="pb-2 mt-2 mb-4 border-bottom">
+                <h4 class="font-weight-bold">Delete Account</h4>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <p>The following information will be deleted:</p>
+                    <ul class="list-group mt-4">
+                        <li class="list-group-item">* User data</li>
+                        <li class="list-group-item"> * The tweets posted using this service</li>
+                        <li class="list-group-item"> * Cancel your subscription after the end of your billing cycle</li>
+                    </ul>
+                    <br />
+                    <p class="text-danger">Once you delete this account, there is no going back. Please be certain.
+                    </p>
+                    <button id="btnDeleteAccount" class="btn btn-lg btn-danger" type="submit"><i
+                            class="fas fa-trash fa-sm"></i>&nbsp;Delete
+                        Account</button>
                 </div>
+            </div>
         </div>
     </div>
 </div>
