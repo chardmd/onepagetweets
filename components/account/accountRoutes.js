@@ -7,11 +7,6 @@ account.get(
   middleware.isAuthenticated,
   accountController.getAccount
 );
-account.post(
-  '/account/delete',
-  middleware.isAuthenticated,
-  accountController.postDeleteAccount
-);
 account.get(
   '/account/unlink/:provider',
   middleware.isAuthenticated,
