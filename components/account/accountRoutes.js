@@ -19,4 +19,10 @@ account.put(
   accountController.putCancelSubscription
 );
 
+account.put(
+  '/account/resubscribe',
+  middleware.isAuthenticated,
+  accountController.putSubscribeBack
+);
+
 module.exports = account;

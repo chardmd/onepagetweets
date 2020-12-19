@@ -28,7 +28,15 @@ const cancelSubscription = async (subscriptionId) => {
   return subscription;
 };
 
+const subscribeAgain = async (subscriptionId) => {
+  const subscription = await stripe.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: false
+  });
+  return subscription;
+};
+
 module.exports = {
   deleteTwitterPost,
-  cancelSubscription
+  cancelSubscription,
+  subscribeAgain
 };

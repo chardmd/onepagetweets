@@ -45,6 +45,29 @@ exports.putCancelSubscription = async (req, res, next) => {
 };
 
 /**
+ * PUT /account/resubscribe
+ * Delete user account.
+ */
+exports.putSubscribeBack = async (req, res, next) => {
+  try {
+    //subscribe again
+    const activeBilling = await AccountDAL.getBillingByUserId(req.user._id);
+    !_.isNil(activeBilling) &&
+      (await AccountService.subscribeAgain(activeBilling.subscriptionId));
+
+    await AccountDAL.updateBillingCancelDate(req.user.id, null);
+  } catch (err) {
+    if (err) {
+      return next(err);
+    }
+  }
+  req.flash('info', {
+    msg: 'Your subscription has been cancelled.'
+  });
+  res.redirect('/account');
+};
+
+/**
  * GET /account/unlink/:provider
  * Unlink OAuth provider.
  */
