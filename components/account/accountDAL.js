@@ -11,3 +11,14 @@ exports.getPostIds = async (userId) => Project.find({ user: userId }).lean();
 
 exports.getBillingByUserId = async (userId) =>
   Billing.findOne({ user: userId, isActive: true }).lean();
+
+exports.updateBillingCancelDate = async (userId, cancelAt) =>
+  Billing.findOneAndUpdate(
+    {
+      user: userId,
+      isActive: true
+    },
+    {
+      cancelAt
+    }
+  );

@@ -12,6 +12,7 @@ const billingSchema = new Schema(
     sessionId: String,
     subscriptionId: String,
     isActive: Boolean,
+    cancelAt: Date,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'

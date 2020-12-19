@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const moment = require('moment');
 const User = require('../../models/User');
 const AccountDAL = require('./accountDAL');
 const AccountService = require('./accountService');
@@ -6,16 +7,12 @@ const AccountService = require('./accountService');
  * GET /account
  * Profile page.
  */
-exports.getAccount = (req, res) => {
-  const { user } = req;
-
+exports.getAccount = async (req, res) => {
+  const billing = await AccountDAL.getBillingByUserId(req.user._id);
   res.render('account/client/account', {
     title: 'Account Management',
-    email: user.email,
-    name: user.profile.name,
-    gender: user.profile.gender,
-    location: user.profile.location,
-    website: user.profile.website
+    hasBilling: !_.isNil(billing),
+    cancelAt: !_.isNil(billing) && billing.cancelAt
   });
 };
 
@@ -27,8 +24,14 @@ exports.putCancelSubscription = async (req, res, next) => {
   try {
     //cancel any billing subscription by end of billing cycle
     const activeBilling = await AccountDAL.getBillingByUserId(req.user._id);
-    !_.isNil(activeBilling) &&
+    const subscription =
+      !_.isNil(activeBilling) &&
       (await AccountService.cancelSubscription(activeBilling.subscriptionId));
+
+    await AccountDAL.updateBillingCancelDate(
+      req.user.id,
+      moment.unix(subscription.cancel_at)
+    );
   } catch (err) {
     if (err) {
       return next(err);
