@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const User = require('../../models/User');
-const Project = require('../../models/Project');
 const AccountDAL = require('./accountDAL');
+const AccountService = require('./accountService');
 /**
  * GET /account
  * Profile page.
@@ -25,13 +25,14 @@ exports.getAccount = (req, res) => {
  */
 exports.postDeleteAccount = async (req, res, next) => {
   try {
-    const { deletedCount } = await User.deleteOne({
-      _id: req.user.id
+    const result = await AccountDAL.getPostIds(req.user._id);
+    const toDeletePromise = result.map(async (item) => {
+      await AccountService.deleteTwitterPost(req.user, item.postId);
     });
-    if (deletedCount === 1) {
-      await AccountDAL.deleteProjectsByUserId(req.user.id);
-      await AccountDAL.deleteBillingByUserId(req.user.id);
-    }
+    await Promise.all(toDeletePromise);
+    await User.deleteOne({ _id: req.user.id });
+    await AccountDAL.deleteProjectsByUserId(req.user.id);
+    await AccountDAL.deleteBillingByUserId(req.user.id);
   } catch (err) {
     if (err) {
       return next(err);
