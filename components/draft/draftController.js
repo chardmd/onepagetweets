@@ -10,7 +10,6 @@ const { isNil } = require('lodash');
  */
 exports.getEditor = async (req, res) => {
   const { user } = req;
-  const validationErrors = [];
 
   //forbid accessing the page
   const billing = await DraftDAL.getBilling(req.user._id);
@@ -20,10 +19,6 @@ exports.getEditor = async (req, res) => {
       totalProjectCount >= parseInt(process.env.MAX_PROJECT_COUNT, 10)) ||
     (!_.isNil(billing) && !billing.isActive)
   ) {
-    validationErrors.push({
-      msg: 'You dont have permission to view the page'
-    });
-    req.flash('errors', validationErrors);
     return res.redirect(`/`);
   }
 
@@ -41,7 +36,6 @@ exports.getEditor = async (req, res) => {
  */
 exports.getPreview = async (req, res) => {
   const { user } = req;
-  const validationErrors = [];
 
   //forbid accessing the page
   const billing = await DraftDAL.getBilling(req.user._id);
@@ -51,10 +45,6 @@ exports.getPreview = async (req, res) => {
       totalProjectCount >= parseInt(process.env.MAX_PROJECT_COUNT, 10)) ||
     (!_.isNil(billing) && !billing.isActive)
   ) {
-    validationErrors.push({
-      msg: 'You dont have permission to view the page'
-    });
-    req.flash('errors', validationErrors);
     return res.redirect(`/`);
   }
 
