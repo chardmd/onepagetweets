@@ -9,34 +9,38 @@
     <div class="card border-0">
         <div class="card-body">
             <div class="pb-2 mt-2 mb-4 border-bottom">
-                <h4 class="font-weight-bold">Cancel Subscription</h4>
+                <h4 class="font-weight-bold">Subscription</h4>
             </div>
             {{#if hasBilling}}
                 <div class="form-group">
                     {{#if cancelAt}}
                         <div class="col-md-12">
                             <h4>
-                                <p class="text-secondary">Your <span class="badge badge-primary">$ {{amount}} /
+                                <h3 class="text-secondary">Your <span class="badge badge-primary">$ {{amount}} /
                                         monthly</span> subscription has been cancelled. It
                                     will end
                                     on <span class="badge badge-danger">{{moment cancelAt format="DD MMMM YYYY"}}</span>
-                                </p>
-                                <p>Alternatively, You can subscribe back by clicking this <a id="linkSubscribe"
-                                        class="font-weight-bold" href="#">Link</a></p>
+                                </h3>
+                                <br />
+                                <h3>Alternatively, You can subscribe back by clicking this <a id="linkSubscribe"
+                                        class="font-weight-bold" href="#">Link</a></h3>
                             </h4>
                         </div>
                     {{else}}
                         <div class="col-md-12">
-                            <p class="text-secondary">You are currently subscribe as a paid user. This will cancel your
-                                current subscription after the end of biling cycle.
-                            </p>
-                            <button id="btnCancelSubscription" class="btn btn-lg btn-secondary" type="submit"><i
-                                    class="far fa-window-close fa-sm"></i>&nbsp;Cancel Subscription</button>
+                            <h3 class="text-secondary">You are currently subscribed to <span
+                                    class="badge badge-primary">$
+                                    {{amount}} /
+                                    monthly</span> subscription.</span>
+                                </p>
+                                <p>If you would like to cancel your subscription, click the button below.</p>
+                                <button id="btnCancelSubscription" class="btn btn-lg btn-danger" type="submit"><i
+                                        class="far fa-window-close fa-sm"></i>&nbsp;Cancel Subscription</button>
                         </div>
                     {{/if}}
                 </div>
             {{else}}
-                No subscription available on this profile.
+                No subscription available on this account.
             {{/if}}
         </div>
     </div>

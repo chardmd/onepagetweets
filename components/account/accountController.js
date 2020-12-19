@@ -38,7 +38,7 @@ exports.putCancelSubscription = async (req, res, next) => {
       return next(err);
     }
   }
-  req.flash('info', {
+  req.flash('warning', {
     msg: 'Your subscription has been cancelled.'
   });
   res.redirect('/account');
@@ -61,8 +61,8 @@ exports.putSubscribeBack = async (req, res, next) => {
       return next(err);
     }
   }
-  req.flash('info', {
-    msg: 'Your subscription has been cancelled.'
+  req.flash('success', {
+    msg: 'Successfully re-subscribe.'
   });
   res.redirect('/account');
 };
