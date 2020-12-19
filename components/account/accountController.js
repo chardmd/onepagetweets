@@ -20,18 +20,51 @@ exports.getAccount = (req, res) => {
 };
 
 /**
+ * PUT /account/cancel
+ * Delete user account.
+ */
+exports.putCancelSubscription = async (req, res, next) => {
+  try {
+    //cancel any billing subscription by end of billing cycle
+    const activeBilling = await AccountDAL.getBillingByUserId(req.user._id);
+    !_.isNil(activeBilling) &&
+      (await AccountService.cancelSubscription(activeBilling.subscriptionId));
+  } catch (err) {
+    if (err) {
+      return next(err);
+    }
+  }
+  req.flash('info', {
+    msg: 'Your subscription has been cancelled.'
+  });
+  res.redirect('/account');
+};
+
+/**
  * POST /account/delete
  * Delete user account.
  */
 exports.postDeleteAccount = async (req, res, next) => {
   try {
+    //delete posted tweets from this service
     const result = await AccountDAL.getPostIds(req.user._id);
     const toDeletePromise = result.map(async (item) => {
       await AccountService.deleteTwitterPost(req.user, item.postId);
     });
     await Promise.all(toDeletePromise);
+
+    //cancel any billing subscription by end of billing cycle
+    const activeBilling = await AccountDAL.getBillingByUserId(req.user._id);
+    !_.isNil(activeBilling) &&
+      (await AccountService.cancelSubscription(activeBilling.subscriptionId));
+
+    //delete user
     await User.deleteOne({ _id: req.user.id });
+
+    //delete projects
     await AccountDAL.deleteProjectsByUserId(req.user.id);
+
+    //delete billing details
     await AccountDAL.deleteBillingByUserId(req.user.id);
   } catch (err) {
     if (err) {

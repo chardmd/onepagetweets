@@ -18,4 +18,10 @@ account.get(
   accountController.getOauthUnlink
 );
 
+account.put(
+  '/account/cancel',
+  middleware.isAuthenticated,
+  accountController.putCancelSubscription
+);
+
 module.exports = account;

@@ -17,7 +17,7 @@
     if (isDeleted) {
       const csrf = $('#csrf').val();
       $.ajax({
-        type: 'DELETE',
+        type: 'POST',
         data: {
           _csrf: csrf
         },
