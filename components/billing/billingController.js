@@ -19,29 +19,39 @@ exports.getBilling = async (req, res) => {
 exports.getSuccess = async (req, res) => {
   const { user } = req;
   const { sessionId } = req.query;
-  const session = await BillingService.getStripeSession(sessionId);
-  const {
-    currency,
-    customer,
-    payment_status,
-    subscription: subscriptionId,
-    amount_total
-  } = session;
-  const billing = await BillingDAL.getBillingByUserId(user._id);
-  if (_.isNil(billing)) {
-    const paymentObject = {
-      customer,
-      amount_total,
-      payment_status,
+  const validationErrors = [];
+  try {
+    const session = await BillingService.getStripeSession(sessionId);
+    const {
       currency,
-      subscriptionId,
-      sessionId
-    };
-    await BillingDAL.saveBilling({ paymentObject, user });
+      customer,
+      payment_status,
+      subscription: subscriptionId,
+      amount_total
+    } = session;
+    const billing = await BillingDAL.getBillingByUserId(user._id);
+    if (_.isNil(billing)) {
+      const paymentObject = {
+        customer,
+        amount_total,
+        payment_status,
+        currency,
+        subscriptionId,
+        sessionId
+      };
+      await BillingDAL.saveBilling({ paymentObject, user });
+    }
+    res.render('billing/client/success', {
+      title: 'Billing Success'
+    });
+  } catch (err) {
+    console.log({ err });
+    validationErrors.push({
+      msg: 'Error loading page.'
+    });
+    req.flash('errors', validationErrors);
+    return res.redirect(`/`);
   }
-  res.render('billing/client/success', {
-    title: 'Billing Success'
-  });
 };
 
 /**
