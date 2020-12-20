@@ -2,7 +2,7 @@
   const disableLoading = () => {
     $('#spinner').addClass('d-none');
     $('#buttonPayment').attr('disabled', false);
-    $('#buttonPayment .text').text('Unlock Now');
+    $('#buttonPayment .text').text('Subscribe Now');
   };
 
   const enableLoading = () => {
