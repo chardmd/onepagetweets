@@ -64,15 +64,21 @@
     <div class="mt-4">
         <div class="container">
             <div class="row">
-                {{#each twitterPost}}
-                    <div class="col-md-4">
-                        <blockquote class="twitter-tweet">
-                            <a href="https://twitter.com/{{user.screen_name}}/status/{{id_str}}">
-                                <div class="custom--loading"></div>
-                            </a>
-                        </blockquote>
+                {{#lengthEqual twitterPost 0}}
+                    <div class="col-md-12 text-center">
+                        <img src="/images/ordinary.svg" width="70%" />
                     </div>
-                {{/each}}
+                    {{else}}
+                        {{#each twitterPost}}
+                            <div class="col-md-4">
+                                <blockquote class="twitter-tweet">
+                                    <a href="https://twitter.com/{{user.screen_name}}/status/{{id_str}}">
+                                        <div class="custom--loading"></div>
+                                    </a>
+                                </blockquote>
+                            </div>
+                        {{/each}}
+                {{/lengthEqual}}
             </div>
         </div>
     </div>
