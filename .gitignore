@@ -23,7 +23,8 @@ public/js/pages/*.js
 
 # API keys and secrets
 .env
-.env.production
+.env.prod
+.env.dev
 
 # Dependency directory
 node_modules
