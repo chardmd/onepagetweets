@@ -87,6 +87,10 @@ Debug mode
 - Login to the server, and install python.
 
 ```
+ssh root@<ip address>
+```
+
+```
 apt-get update
 apt install python
 ```
@@ -122,6 +126,8 @@ TTL = Automatic
 - Create a directory in the server (droplet) at `/opt/onepagetweets` and copy the whole source code. Use Cyberduck to make this task easier.
 
 - Navigate to the `opt/onepagetweets` and look for the `dc:cert` script in `package.json`.
+
+- Update the `email` in `dc:cert`
 
 - Copy the command and execute it. (Don't bother to install NPM or Node.JS as we are going to delete this folder as soon as the certificate was installed.)
 
