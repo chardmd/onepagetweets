@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "postinstall": "npm rebuild node-sass",
+    "prestart": "npm run copy",
     "start": "node app.js",
     "debug": "nodemon --inspect app.js",
     "dc:up": "docker-compose -f dc-stack-dev.yml build && env $(cat .env | grep ^[A-Z] | xargs) docker stack deploy -c dc-stack-dev.yml app && docker service ls",

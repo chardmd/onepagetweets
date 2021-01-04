@@ -10,7 +10,7 @@ steps:
     type: 'git-clone'
     description: 'Cloning main repository...'
     repo: 'chardmd/onepagetweets'
-    revision: '${{CF_BRANCH}}'
+    revision: 'master'
     when:
       branch:
         only:
@@ -23,17 +23,19 @@ steps:
       build_web:
         title: 'Building Web'
         type: 'build'
-        image_name: 'chardmd/web'
+        image_name: 'onepagetweets/images'
         working_directory: '${{clone}}'
-        tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
+        tag: 'tweets-web'
         dockerfile: 'Dockerfile'
+        registry: 'tweetsdockerhub'
       build_proxy:
         title: 'Building Proxy'
         type: 'build'
-        image_name: 'chardmd/proxy'
+        image_name: 'onepagetweets/images'
         working_directory: '${{clone}}/nginx-conf'
-        tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
+        tag: 'tweets-proxy'
         dockerfile: 'Dockerfile-nginx'
+        registry: 'tweetsdockerhub'
     when:
       branch:
         only:
@@ -88,14 +90,14 @@ steps:
         title: 'Pushing Web'
         type: 'push'
         candidate: '${{build_web}}'
-        tag: 'tweets-web-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
+        tag: 'tweets-web'
         image_name: 'onepagetweets/images'
         registry: 'tweetsdockerhub'
       push_proxy:
         title: 'Pushing Proxy'
         type: 'push'
         candidate: '${{build_proxy}}'
-        tag: 'tweets-proxy-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
+        tag: 'tweets-proxy'
         image_name: 'onepagetweets/images'
         registry: 'tweetsdockerhub'
     when:
@@ -108,16 +110,7 @@ steps:
     title: 'deploying latest version...'
     working_directory: '${{clone}}'
     commands:
-      - rdocker ${{RDOCKER_HOST}} docker login -u ${{DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}}
-        \&\& docker pull onepagetweets/images:tweets-proxy-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
-        \&\& docker pull onepagetweets/images:tweets-web-${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}
-        \&\& docker stack deploy -c dc-stack-prod.yml --with-registry-auth ${{DOCKER_STACK_NAME}}
-        \&\& docker service ls
-        \&\& echo "prepare to delete unused objects..."
-        \&\& sleep 8
-        \&\& docker system prune -a -f
-        \&\& docker image prune -a -f
-        \&\& docker container ps
+      - rdocker ${{RDOCKER_HOST}} docker login -u ${{DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} \&\& docker pull onepagetweets/images:tweets-proxy \&\& docker pull onepagetweets/images:tweets-web \&\& docker stack deploy -c dc-stack-prod.yml --with-registry-auth ${{DOCKER_STACK_NAME}} \&\& docker service ls \&\& echo "prepare to delete unused objects..." \&\& sleep 8 \&\& docker system prune -a -f \&\& docker image prune -a -f \&\& docker container ps
     environment:
       - CF_BRANCH_TAG_NORMALIZED=${{CF_BRANCH_TAG_NORMALIZED}}
       - CF_SHORT_REVISION=${{CF_SHORT_REVISION}}
