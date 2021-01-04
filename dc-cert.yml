@@ -19,12 +19,13 @@ services:
       - tweets-network
     environment:
       NODE_ENV: production
-      PORT: 8080
       BASE_URL: '${BASE_URL}'
+      PORT: 8080
       HOME_PAGE_URL: '${HOME_PAGE_URL}'
       MONGODB_URI: '${MONGODB_URI}'
       SESSION_SECRET: '${SESSION_SECRET}'
       SENTRY_DSN: '${SENTRY_DSN}'
+      MAX_PROJECT_COUNT: '${MAX_PROJECT_COUNT}'
       TWITTER_API_KEY: '${TWITTER_API_KEY}'
       TWITTER_API_SECRET: '${TWITTER_API_SECRET}'
       TWITTER_ACCESS_TOKEN: '${TWITTER_ACCESS_TOKEN}'
