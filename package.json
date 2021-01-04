@@ -15,7 +15,7 @@
     "start": "node app.js",
     "debug": "nodemon --inspect app.js",
     "dc:up": "docker-compose -f dc-stack-dev.yml build && env $(cat .env | grep ^[A-Z] | xargs) docker stack deploy -c dc-stack-dev.yml app && docker service ls",
-    "dc:kill": "docker stack rm app",
+    "dc:down": "docker stack rm app",
     "dc:clean": "docker rm -f $(docker ps -a -q) && docker volume prune -f",
     "dc:clean:img": "docker rmi $(docker images -a -q) -f",
     "dc:logs": "docker service logs -f app_web",
