@@ -9,7 +9,7 @@
 version: '3.7'
 services:
   web:
-    image: onepagetweets/images:tweets-web-${CF_BRANCH_TAG_NORMALIZED}-${CF_SHORT_REVISION}
+    image: onepagetweets/images:tweets-web
     networks:
       - tweets-network
     ports:
@@ -41,7 +41,7 @@ services:
       STRIPE_SUBSCRIPTION_ID: '${STRIPE_SUBSCRIPTION_ID}'
       STRIPE_PRICE: '${STRIPE_PRICE}'
   proxy:
-    image: onepagetweets/images:tweets-proxy-${CF_BRANCH_TAG_NORMALIZED}-${CF_SHORT_REVISION}
+    image: onepagetweets/images:tweets-proxy
     networks:
       - tweets-network
     deploy:
