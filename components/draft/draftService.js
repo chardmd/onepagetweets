@@ -1,5 +1,7 @@
 const Twitter = require('twitter-lite');
 const LZString = require('lz-string');
+const _ = require('lodash');
+const DraftDAL = require('./draftDAL');
 
 const newClient = ({ subdomain = 'api', accessToken, tokenSecret }) => {
   return new Twitter({
@@ -42,7 +44,24 @@ const decompressPayload = (data) => {
   return decompressData;
 };
 
+const isRedirectToBillingPage = async (user) => {
+  //forbid accessing the page
+  const billing = await DraftDAL.getBilling(user._id);
+  const totalProjectCount = await DraftDAL.countProjectTotal(user.id);
+  if (
+    (!user.isAdmin &&
+      _.isNil(billing) &&
+      totalProjectCount >= parseInt(process.env.MAX_PROJECT_COUNT, 10)) ||
+    (!user.isAdmin && !_.isNil(billing) && !billing.isActive)
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 module.exports = {
   uploadToTwitter,
-  decompressPayload
+  decompressPayload,
+  isRedirectToBillingPage
 };

@@ -75,6 +75,10 @@ exports.postCreate = async (req, res) => {
       ) {
         return createProject(); //create and redirect
       } else {
+        //if Admin, we allow unlimited creation of projects
+        if (req.user.isAdmin) {
+          return createProject();
+        }
         //customer needs to pay
         await HomeDAL.disabledBilling(req.user._id);
         return res.redirect(`/billing`);

@@ -12,13 +12,8 @@ exports.getEditor = async (req, res) => {
   const { user } = req;
 
   //forbid accessing the page
-  const billing = await DraftDAL.getBilling(req.user._id);
-  const totalProjectCount = await DraftDAL.countProjectTotal(req.user.id);
-  if (
-    (_.isNil(billing) &&
-      totalProjectCount >= parseInt(process.env.MAX_PROJECT_COUNT, 10)) ||
-    (!_.isNil(billing) && !billing.isActive)
-  ) {
+  const isRedirect = await DraftService.isRedirectToBillingPage(user);
+  if (isRedirect) {
     return res.redirect(`/`);
   }
 
@@ -38,13 +33,8 @@ exports.getPreview = async (req, res) => {
   const { user } = req;
 
   //forbid accessing the page
-  const billing = await DraftDAL.getBilling(req.user._id);
-  const totalProjectCount = await DraftDAL.countProjectTotal(req.user.id);
-  if (
-    (_.isNil(billing) &&
-      totalProjectCount >= parseInt(process.env.MAX_PROJECT_COUNT, 10)) ||
-    (!_.isNil(billing) && !billing.isActive)
-  ) {
+  const isRedirect = await DraftService.isRedirectToBillingPage(user);
+  if (isRedirect) {
     return res.redirect(`/`);
   }
 
