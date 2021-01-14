@@ -221,6 +221,18 @@ onepagetweets/images:tweets-proxy
 
 ```
 
+## Code Fresh (codefresh.io)
+
+This CI/CD provides free unlimited builds and deployment for our project.
+
+Please follow this guide on how to setup the deployment of docker swarm
+
+[Deploying Docker Swarm](https://codefresh.io/docs/docs/yaml-examples/examples/docker-swarm/)
+
+When setting up the environmental variable especially the `SSH_KEY`, simply type this in the terminal, and copy the value.
+
+`cat ~/.ssh/id_rsa.pub | tr '\n' ','`
+
 ## Contributing
 
 If you've got an improvement, just send in a pull request. If you've got feature ideas, simply [open a new issues](https://github.com/chardmd/onepagetweets/issues/new)!
