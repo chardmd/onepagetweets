@@ -204,6 +204,23 @@ ssl_dhparam /etc/ssl/dhparam/dhparam-2048.pem;
 
 ```
 
+## Docker Hub
+
+Dockerhub provides one free private repository per account.
+To take advantage of this, we will create the private repository using the following format:
+
+```
+<projectName>/images
+
+tags: <name of the project>
+
+example:
+
+onepagetweets/images:tweets-web
+onepagetweets/images:tweets-proxy
+
+```
+
 ## Contributing
 
 If you've got an improvement, just send in a pull request. If you've got feature ideas, simply [open a new issues](https://github.com/chardmd/onepagetweets/issues/new)!
